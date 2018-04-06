@@ -10,8 +10,8 @@
             
             let config = {
                 type:Phaser.AUTO,
-                width:800,
-                height:450,
+                width:512*1.5,
+                height:512*1.5,
                 physics: {
                     default:'arcade',
                     arcade:{
@@ -23,5 +23,25 @@
             
             let game = new Phaser.Game(config);
         </script>
+        <style>
+            body {
+                background-color: #222;
+                display: block;
+                margin: auto;
+                color:#fff;
+            }
+            
+            canvas{
+                display: block;
+                margin: auto;
+                color:#fff;
+            }
+        </style>
     </head>
+    <body>
+        <center>
+            <h1>The Legend of Chica:</h1>
+            <h2>Golden Guardian</h2>
+        </center>
+    </body>
 </html>
