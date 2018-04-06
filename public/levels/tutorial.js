@@ -15,7 +15,7 @@ export default class Tutorial extends Phaser.Scene {
     }
     
     create(){
-        chica.create(this, this.sys.game.config.width/2, this.sys.game.config.height/2);
+        //chica.create(this, this.sys.game.config.width/2, this.sys.game.config.height/2);
         this.createKeyControls();
         this.scene.add('Dialogue', new Dialogue([
                 { char: 'Tiny Box Tim', text: 'Chica? Do you even know how to fight?' },

@@ -13,17 +13,20 @@ class Hud extends Phaser.Scene {
     }
     
     create(){
-        //createPlayerHealth();
+        
+        //Create graphics
+        const height = this.sys.game.config.height;
+        const width = this.sys.game.config.width;
+        const graphics = this.add.graphics();
+        graphics.fillStyle(0x888888, 1);
+        graphics.fillRect(0, height/2, width, height);
+        
+        //CreateChildren
         actionOptions.create(this);
+        chica.createInBattle(this);
     }
     
     update(){
-        this.healthText.setText(`Health: ${ chica.health }`);
-    }
-    
-    createPlayerHealth(){
-        this.healthText = _this.add.text(0, 0, `Health: ${ chica.health }`, { fontSize: '32px', fill: '#ffffff', color: '#ffffff' });
-        this.healthText.setOrigin(0, 0);
     }
 }
 

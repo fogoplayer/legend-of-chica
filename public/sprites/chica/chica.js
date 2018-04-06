@@ -1,7 +1,13 @@
 //JS Module for Chica
 
 const chica = {
-    health:100,
+    stats: {
+        hp:20,
+        maxHp:20,
+        tp:20,
+        maxTp:20,
+    },
+    
     actions: [
             
             {
@@ -26,7 +32,7 @@ const chica = {
             },
             
             {
-                name:'Doggie\nTreat',
+                name:'Doggie Treat',
                 dealsDamage:0,
                 reducesDamage:0,
                 restoresHealth:15,
@@ -40,13 +46,23 @@ const chica = {
     },
     
     
-    create(_this, initialX, initialY){
+    createInWorld(_this, initialX, initialY){
         _this.chica = _this.physics.add.sprite(initialX, initialY, 'chica').setScale(4);
         _this.chica.setOrigin(0.5,0.5);
         _this.chica.setCollideWorldBounds(true);
         
         chica.createAnimations(_this);
         _this.chica.anims.play('turn');
+        
+        chica.createKeyboardControls(_this);
+    },
+    
+    createInBattle(_this){
+        const height = _this.sys.game.config.height;
+        const width = _this.sys.game.config.width;
+        _this.add.text(4, height/2, `Chica`, { fontSize: '32px', fill: '#ffffff', color: '#ffffff' });
+        _this.add.text(4, height/2 + 36, `ICON`, { fontSize: '48px', fill: '#ffffff', color: '#ffffff' });
+        _this.add.text(4, height/2 + 32 + 4 + 48 + 4, `HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`, { fontSize: '16px', fill: '#ffffff', color: '#ffffff' });
         
         chica.createKeyboardControls(_this);
     },
