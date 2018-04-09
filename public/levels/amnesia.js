@@ -32,7 +32,7 @@ export default class Amnesia extends Phaser.Scene {
         const _this = this;
         this.sceneWidth = this.sys.game.config.width;
         this.sceneHeight = this.sys.game.config.height;
-        chica.createInWorld(this, sceneWidth / 3, this.sys.game.config.height / 2);
+        chica.createInWorld(this, this.sceneWidth / 3, this.sys.game.config.height / 2);
         this.dialogue = this.scene.add('Dialogue', new Dialogue([{
                 char: 'Chica',
                 text: 'Wooooof…'
