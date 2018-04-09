@@ -4,10 +4,9 @@
         <title>The Legend of Chica: Golden Guardian</title>
         <script src="phaser.min.js"></script>
         <script type="module">
-            import Tutorial from './levels/tutorial.js';
-            import Hud from './assets/combatHud/combatHud.js';
-            import Dialogue from './assets/dialogue/dialogue.js';
-            
+            //import Tutorial from './levels/tutorial.js';
+            import Amnesia from './levels/amnesia.js';
+
             let config = {
                 type:Phaser.AUTO,
                 width:512*1.5,
@@ -18,7 +17,7 @@
                         gravity:{ y: 0, x: 0, }
                     }
                 },
-                scene: [ Tutorial, Hud ]
+                scene: [ Amnesia ]
             };
             
             let game = new Phaser.Game(config);

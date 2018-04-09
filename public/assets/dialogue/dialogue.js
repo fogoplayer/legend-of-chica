@@ -68,18 +68,16 @@ class Dialogue extends Phaser.Scene {
         console.log(`${ this.dialogIndex } < ${ this.dialogList.length }`);
         if (this.dialogIndex < this.dialogList.length) {
             this.text.setText(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text }`);
-            console.log(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text }`);
             this.sys.wake();
             this.dialogIndex++;
             this.scene.manager.pause('Level');
-            console.log(this.scene.isSleeping());
         }
         else {
             this.input.keyboard.removeAllListeners('keydown_ENTER');
             this.scene.manager.resume('Level');
             this.scene.get('Level').stage++;
             this.scene.manager.remove('Dialogue');
-            console.log('Dialogue Terminated');
+            console.log('Dialogue Terminated. Stage ' + this.scene.get('Level').stage);
         }
 
     }

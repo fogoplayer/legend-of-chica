@@ -61,7 +61,7 @@ const chica = {
         chica.createAnimations(_this);
         _this.chica.anims.play('turn');
 
-        chica.createKeyboardControls(_this);
+        chica.createKeyboardControlsInWorld(_this);
     },
 
     createInBattle(_this) {
@@ -83,97 +83,94 @@ const chica = {
             color: '#ffffff'
         });
 
-        chica.createKeyboardControls(_this);
+        chica.createKeyboardControlsInBattle(_this);
     },
 
-    update(_this) {
+    updateInBattle(_this) {
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`);
     },
 
-    createKeyboardControls(_this) {
-        let sceneType = _this.sceneType;
-        if (sceneType === "world") {
-            //Up
-            _this.input.keyboard.on('keydown_UP', function() {
-                _this.chica.setVelocityY(-chica.speed);
-            }, _this);
+    createKeyboardControlsInWorld(_this) {
+        //Up
+        _this.input.keyboard.on('keydown_UP', function() {
+            _this.chica.setVelocityY(-chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keydown_W', function() {
-                _this.chica.setVelocityY(-chica.speed);
-            }, _this);
+        _this.input.keyboard.on('keydown_W', function() {
+            _this.chica.setVelocityY(-chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_UP', function() {
-                _this.chica.setVelocityY(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_UP', function() {
+            _this.chica.setVelocityY(0);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_W', function() {
-                _this.chica.setVelocityY(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_W', function() {
+            _this.chica.setVelocityY(0);
+        }, _this);
 
-            //Down
-            _this.input.keyboard.on('keydown_DOWN', function() {
-                _this.chica.setVelocityY(chica.speed);
-            }, _this);
+        //Down
+        _this.input.keyboard.on('keydown_DOWN', function() {
+            _this.chica.setVelocityY(chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keydown_S', function() {
-                _this.chica.setVelocityY(chica.speed);
-            }, _this);
+        _this.input.keyboard.on('keydown_S', function() {
+            _this.chica.setVelocityY(chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_DOWN', function() {
-                _this.chica.setVelocityY(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_DOWN', function() {
+            _this.chica.setVelocityY(0);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_S', function() {
-                _this.chica.setVelocityY(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_S', function() {
+            _this.chica.setVelocityY(0);
+        }, _this);
 
-            //Left
-            _this.input.keyboard.on('keydown_LEFT', function() {
-                _this.chica.setVelocityX(-chica.speed);
-            }, _this);
+        //Left
+        _this.input.keyboard.on('keydown_LEFT', function() {
+            _this.chica.setVelocityX(-chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keydown_A', function() {
-                _this.chica.setVelocityX(-chica.speed);
-            }, _this);
+        _this.input.keyboard.on('keydown_A', function() {
+            _this.chica.setVelocityX(-chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_LEFT', function() {
-                _this.chica.setVelocityX(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_LEFT', function() {
+            _this.chica.setVelocityX(0);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_A', function() {
-                _this.chica.setVelocityX(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_A', function() {
+            _this.chica.setVelocityX(0);
+        }, _this);
 
-            //Right
-            _this.input.keyboard.on('keydown_RIGHT', function() {
-                _this.chica.setVelocityX(chica.speed);
-            }, _this);
+        //Right
+        _this.input.keyboard.on('keydown_RIGHT', function() {
+            _this.chica.setVelocityX(chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keydown_D', function() {
-                _this.chica.setVelocityX(chica.speed);
-            }, _this);
+        _this.input.keyboard.on('keydown_D', function() {
+            _this.chica.setVelocityX(chica.speed);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_RIGHT', function() {
-                _this.chica.setVelocityX(0);
-            }, _this);
+        _this.input.keyboard.on('keyup_RIGHT', function() {
+            _this.chica.setVelocityX(0);
+        }, _this);
 
-            _this.input.keyboard.on('keyup_D', function() {
-                _this.chica.setVelocityX(0);
-            }, _this);
-        }
-
-        if (sceneType === "battle") {
-            _this.input.keyboard.on('keydown', function(e) {
-                if (e.key < 10) {
-                    try {
-                        console.log(chica.actions[e.key - 1].name);
-                    }
-                    catch (e) {
-                        console.log("No ability");
-                    }
+        _this.input.keyboard.on('keyup_D', function() {
+            _this.chica.setVelocityX(0);
+        }, _this);
+    },
+    
+    createKeyboardControlsInBattle(_this){
+        _this.input.keyboard.on('keydown', function(e) {
+            if (e.key < 10) {
+                try {
+                    console.log(chica.actions[e.key - 1].name);
                 }
-            }, _this);
-        }
+                catch (e) {
+                    console.log("No ability");
+                }
+            }
+        }, _this);
     },
 
     createAnimations(_this) {

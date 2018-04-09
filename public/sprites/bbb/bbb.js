@@ -22,17 +22,17 @@ const bbb = {
     ],
 
     preload(_this) {
+        _this.load.image('bbb', './sprites/bbb/bbb.png');
         //_this.load.spritesheet('chica', './sprites/chica/chicaSpriteSheet.png',{frameWidth:24, frameHeight: 32});
         //chica.speed = _this.sys.game.config.height/2;
     },
 
 
     createInWorld(_this, x, y) {
-        /*_this.chica = _this.physics.add.sprite(x, y, 'chica').setScale(4);
-        _this.chica.setOrigin(0.5,0.5);
-        _this.chica.setCollideWorldBounds(true);
-        
-        chica.createAnimations(_this);
+        _this.bbb = _this.physics.add.sprite(x, y, 'bbb').setScale(.25);
+        _this.bbb.setOrigin(0.5,0.5);
+        _this.bbb.setCollideWorldBounds(true);
+        /*chica.createAnimations(_this);
         _this.chica.anims.play('turn');
         
         chica.createKeyboardControls(_this);*/
@@ -42,22 +42,32 @@ const bbb = {
         const width = _this.sys.game.config.width;
         const height = _this.sys.game.config.height;
         const graphics = _this.add.graphics();
-        graphics.fillStyle(0xff0000, 1);
-        graphics.fillRect(x - 50, y - 50, 100, 100);
-        _this.add.text(x, y - 54, `Big Box Barry`, {
-            fontSize: '16px',
+        _this.bbb = graphics.fillStyle(0xff0000, 1);
+        graphics.fillRect(x - 100, y - 100, 200, 200);
+        _this.add.text(x, y - 104, `Big Box Barry`, {
+            fontSize: '32px',
             fill: '#ffffff',
             color: '#ffffff'
         }).setOrigin(0.5, 1);
-        this.statsText = _this.add.text(x, y + 54, `HP: ${ this.stats.hp }/${ this.stats.maxHp }`, {
-            fontSize: '16px',
+        this.statsText = _this.add.text(x, y + 104, `HP: ${ this.stats.hp }/${ this.stats.maxHp }`, {
+            fontSize: '32px',
             fill: '#ffffff',
             color: '#ffffff'
         }).setOrigin(0.5, 0);
     },
 
-    update(_this) {
+    updateInBattle(_this) {
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }`);
+    },
+    
+    updateInWorld(_this, x, y){
+        if(_this.bbb){
+            if (_this.bbb.x != x || _this.bbb.y != y) {
+                _this.bbb.moveTo(x, y);
+            }else{
+                this.bbb.setVelocity(0, 0);
+            }
+        }
     },
 
     createAnimations(_this) {

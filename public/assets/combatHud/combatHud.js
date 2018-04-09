@@ -29,6 +29,9 @@ class Hud extends Phaser.Scene {
         //Create Children
         actionOptions.create(this);
         chica.createInBattle(this);
+        
+        console.log(this.scene.manager.scenes);
+
     }
 
     update() {}

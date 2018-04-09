@@ -47,7 +47,7 @@ const combat = {
         //Create Dialogue to display results
         _this.scene.add('Dialogue', new Dialogue([{
             char: 'Combat',
-            text: `${ this.enemy.name } used ${ enemyAttack.name.toUpperCase() }\n${ this.player.name } took ${ enemyAttack.dealsDamage } points of damage\n\n${ this.player.name } used ${playerAttack.name.toUpperCase() }\n${ this.enemy.name } took ${ playerAttack.dealsDamage } points of damage\n`
+            text: `${ this.enemy.name } used ${ enemyAttack.name.toUpperCase() }\n${ this.player.name } took ${ -playerAttack.restoresHealth - playerAttack.reducesDamage + enemyAttack.dealsDamage } points of damage\n\n${ this.player.name } used ${playerAttack.name.toUpperCase() }\n${ this.enemy.name } took ${ -enemyAttack.restoresHealth - enemyAttack.reducesDamage + playerAttack.dealsDamage } points of damage\n`
         }, ], 0x8888ff));
     },
 };

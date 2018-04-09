@@ -3,6 +3,7 @@ import chica from '../sprites/chica/chica.js';
 import bbb from '../sprites/bbb/bbb.js';
 import Dialogue from '../assets/dialogue/dialogue.js';
 import combat from '../assets/combat/combat.js';
+import Hud from '../assets/combatHud/combatHud.js';
 
 export default class Tutorial extends Phaser.Scene {
     constructor() {
@@ -13,7 +14,6 @@ export default class Tutorial extends Phaser.Scene {
             key: 'Level',
             active: true
         });
-        this.sceneType = 'tutorial';
         this.stage = 0;
     }
 
@@ -22,8 +22,9 @@ export default class Tutorial extends Phaser.Scene {
     }
 
     create() {
+        this.scene.add('Hud', Hud);
         combat.createCombat(this, chica, bbb);
-        this.createKeyControls();
+        this.createKeyControlsInBattle();
         this.scene.add('Dialogue', new Dialogue([{
                 char: 'Tiny Box Tim',
                 text: 'Chica? Do you even know how to fight?'
@@ -45,8 +46,8 @@ export default class Tutorial extends Phaser.Scene {
     }
 
     update() {
-        chica.update(this);
-        bbb.update(this);
+        chica.updateInBattle(this);
+        bbb.updateInBattle(this);
     }
 
     createKeyControls() {
