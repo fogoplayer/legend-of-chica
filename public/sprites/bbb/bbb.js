@@ -60,12 +60,12 @@ const bbb = {
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }`);
     },
     
-    updateInWorld(_this, x, y){
+    updateInWorld(_this, x){
         if(_this.bbb){
-            if (_this.bbb.x != x || _this.bbb.y != y) {
+            if (_this.bbb.x != x) {
                 _this.bbb.setVelocityX(-80);
             }else{
-                this.bbb.setVelocity(0, 0);
+                this.bbb.setVelocityX(0);
             }
         }
     },

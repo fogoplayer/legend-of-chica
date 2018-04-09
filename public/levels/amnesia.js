@@ -62,6 +62,6 @@ export default class Amnesia extends Phaser.Scene {
 
     update() {
         //chica.updateInWorld(this);
-        bbb.updateInWorld(this );
+        bbb.updateInWorld(this, this.sceneWidth/2 - 200);
     }
 }
