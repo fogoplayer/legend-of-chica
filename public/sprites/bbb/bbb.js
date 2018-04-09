@@ -63,7 +63,7 @@ const bbb = {
     updateInWorld(_this, x, y){
         if(_this.bbb){
             if (_this.bbb.x != x || _this.bbb.y != y) {
-                _this.bbb.moveTo(x, y);
+                _this.bbb.setVelocityX(-80);
             }else{
                 this.bbb.setVelocity(0, 0);
             }
