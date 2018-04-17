@@ -19,12 +19,14 @@ export default class Tutorial extends Phaser.Scene {
 
     preload() {
         chica.preload(this);
+        bbb.preload(this);
     }
 
     create() {
         this.scene.add('Hud', Hud);
+        chica.createInBattle(this);
         combat.createCombat(this, chica, bbb);
-        this.createKeyControlsInBattle();
+        this.createKeyControls();
         this.scene.add('Dialogue', new Dialogue([{
                 char: 'Tiny Box Tim',
                 text: 'Chica? Do you even know how to fight?'

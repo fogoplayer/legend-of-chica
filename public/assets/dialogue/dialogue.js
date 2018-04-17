@@ -65,7 +65,6 @@ class Dialogue extends Phaser.Scene {
     }
 
     loadDialogue() {
-        console.log(`${ this.dialogIndex } < ${ this.dialogList.length }`);
         if (this.dialogIndex < this.dialogList.length) {
             this.text.setText(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text }`);
             this.sys.wake();

@@ -73,9 +73,8 @@ export default class Amnesia extends Phaser.Scene {
             _this.scene.manager.remove('Level');
             setTimeout(function(){
                 _this.scene.add('Tutorial', new Tutorial());
-                _this.input.keyboard.removeAllListeners();
                 _this.scene.start('Tutorial');
-                                                                                                    console.log('Started')
+                _this.s
             },1000)
             
         })
