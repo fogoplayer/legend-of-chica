@@ -22,11 +22,10 @@ export default class Amnesia extends Phaser.Scene {
         bbb.preload(this);
         tbt.preload(this);
         this.load.image('map', './levels/amnesia.png');
-
     }
 
     create() {
-        var map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
+        let map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
         
         const _this = this;
         this.sceneWidth = this.sys.game.config.width;

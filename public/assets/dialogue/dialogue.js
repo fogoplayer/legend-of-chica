@@ -38,7 +38,7 @@ class Dialogue extends Phaser.Scene {
         //Chica on the left, NPCs on the right
 
         //Add text box
-        graphics.fillStyle(this.color, 1);
+        graphics.fillStyle(this.color, 0.5);
         graphics.fillRect(0, height / 2, this.sys.game.config.width, height / 2);
 
         //Create text boxes

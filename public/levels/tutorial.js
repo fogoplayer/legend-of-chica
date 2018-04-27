@@ -20,9 +20,13 @@ export default class Tutorial extends Phaser.Scene {
     preload() {
         chica.preload(this);
         bbb.preload(this);
+        this.load.image('map', './levels/amnesia.png');
     }
 
     create() {
+        let map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
+
+        
         this.scene.add('Hud', Hud);
         chica.createInBattle(this);
         combat.createCombat(this, chica, bbb);
