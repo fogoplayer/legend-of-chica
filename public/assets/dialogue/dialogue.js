@@ -39,10 +39,10 @@ class Dialogue extends Phaser.Scene {
 
         //Add text box
         graphics.fillStyle(this.color, 0.5);
-        graphics.fillRect(0, height / 2, this.sys.game.config.width, height / 2);
+        graphics.fillRect(0, height / 1.5, this.sys.game.config.width, height / 1.5);
 
         //Create text boxes
-        this.text = this.add.text(10, height / 2 + 10, '', {
+        this.text = this.add.text(10, height / 1.5 + 10, '', {
             fontSize: '32px',
             fill: '#ffffff',
             color: '#ffffff',
