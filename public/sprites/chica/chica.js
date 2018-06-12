@@ -13,37 +13,63 @@ const chica = {
     },
 
     actions: [
-
         {
-            name: "Whap",
-            dealsDamage: 17,
-            reducesDamage: 0,
-            restoresHealth: 0
+            name:"Attack",
+            children:[
+                {
+                    name: "Whap",
+                    dealsDamage: 17,
+                    reducesDamage: 0,
+                    restoresHealth: 0
+                },
+            ]
         },
-
+        
         {
-            name: "Cuteness",
-            dealsDamage: 8,
-            reducesDamage: 0,
-            restoresHealth: 7,
+            name:"Defend",
+            children:[
+                {
+                    name: "Defend",
+                    dealsDamage: 0,
+                    reducesDamage: 9,
+                    restoresHealth: 0,
+                },
+            ]
         },
-
+        
         {
-            name: "Defend",
-            dealsDamage: 0,
-            reducesDamage: 9,
-            restoresHealth: 0,
+            name:"Special",
+            children:[
+        
+                {
+                    name: "Cuteness",
+                    dealsDamage: 8,
+                    reducesDamage: 0,
+                    restoresHealth: 7,
+                },
+            ]
         },
-
+        
         {
-            name: 'Doggie Treat',
-            dealsDamage: 0,
-            reducesDamage: 0,
-            restoresHealth: 15,
-        }
-
+            name:"Items",
+            children:[
+                {
+                    name: 'Doggie Treat',
+                    dealsDamage: 0,
+                    reducesDamage: 0,
+                    restoresHealth: 15,
+                }
+            ]
+        },
+        
+        
     ],
-
+    
+    /**
+     * Preload for Chica
+     * @param _this
+     * @return null
+    **/
     preload(_this) {
         _this.load.spritesheet('chica', './sprites/chica/chicaSpriteSheet.png', {
             frameWidth: 24,
@@ -51,8 +77,13 @@ const chica = {
         });
         chica.speed = _this.sys.game.config.height / 2;
     },
-
-
+    
+    /**
+     * Create for Chica
+     * Should only be called in world levels
+     * @param null
+     * @return null
+    **/
     createInWorld(_this, initialX, initialY) {
         _this.chica = _this.physics.add.sprite(initialX, initialY, 'chica').setScale(4);
         _this.chica.setOrigin(0.5, 0.5);
@@ -63,7 +94,13 @@ const chica = {
 
         chica.createKeyboardControlsInWorld(_this);
     },
-
+    
+    /**
+     * Create for Chica
+     * Should only be called in combat levels
+     * @param _this-the current scene
+     * @return null
+    **/
     createInBattle(_this) {
         const height = _this.sys.game.config.height;
         const width = _this.sys.game.config.width;
@@ -82,14 +119,29 @@ const chica = {
             fill: '#ffffff',
             color: '#ffffff'
         });
-
-        chica.createKeyboardControlsInBattle(_this);
     },
-
-    updateInBattle(_this) {
+    
+    /**
+     * Update for Chica
+     * Should only be called in combat levels
+     * @param _this-the current scene
+     * @return null
+    **/
+    updateInBattle() {
+        /*console.log("HP:" + this.stats.hp);
+        console.log("StatsText:", this.statsText);
+        this.statsText.setBackgroundColor("#000000")
+        this.statsText.setText("Hello");*/
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`);
     },
-
+    
+    /**
+     * Create keyboard controls for Chica
+     * Should only be called in world levels
+     * Creates up, down, left, right
+     * @param _this-the current scene
+     * @return null
+    **/
     createKeyboardControlsInWorld(_this) {
         //Up
         _this.input.keyboard.on('keydown_UP', function() {
@@ -160,19 +212,13 @@ const chica = {
         }, _this);
     },
     
-    createKeyboardControlsInBattle(_this){
-        _this.input.keyboard.on('keydown', function(e) {
-            if (e.key < 10) {
-                try {
-                    console.log(chica.actions[e.key - 1].name);
-                }
-                catch (e) {
-                    console.log("No ability");
-                }
-            }
-        }, _this);
-    },
-
+    /**
+     * Create animations for Chica
+     * Creates left, right and turn
+     * TODO put in real anims once we have spritesheets
+     * @param _this-the current scene
+     * @return null
+    **/
     createAnimations(_this) {
 
         _this.anims.create({

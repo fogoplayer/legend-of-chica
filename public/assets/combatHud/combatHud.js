@@ -3,6 +3,11 @@ import chica from '../../sprites/chica/chica.js';
 import actionOptions from './actionOptions/actionOptions.js';
 
 class Hud extends Phaser.Scene {
+    /**
+     * Constructor for the HUD
+     * @param null
+     * @return null
+    **/
     constructor() {
         super({
             key: 'Hud'
@@ -12,13 +17,14 @@ class Hud extends Phaser.Scene {
             active: true
         });
     }
-
-    preload() {
-
-    }
-
+    
+    /**
+     * Create function for the HUD
+     * Creates rectangle overlay, then calls actionOptions.create() and chica.createInBattle() to add them
+     * @param null
+     * @return null
+    **/
     create() {
-
         //Create graphics
         const height = this.sys.game.config.height;
         const width = this.sys.game.config.width;
@@ -29,7 +35,6 @@ class Hud extends Phaser.Scene {
         //Create Children
         actionOptions.create(this);
         chica.createInBattle(this);
-        
         console.log(this.scene.manager.scenes);
 
     }

@@ -1,11 +1,17 @@
 //JS module for the tutorial Scene
-import chica from '../sprites/chica/chica.js';
-import bbb from '../sprites/bbb/bbb.js';
-import Dialogue from '../assets/dialogue/dialogue.js';
-import combat from '../assets/combat/combat.js';
-import Hud from '../assets/combatHud/combatHud.js';
+import chica from '../../sprites/chica/chica.js';
+import bbb from '../../sprites/bbb/bbb.js';
+import Dialogue from '../../assets/dialogue/dialogue.js';
+import combat from '../../assets/combat/combat.js';
+import Hud from '../../assets/combatHud/combatHud.js';
 
 export default class Tutorial extends Phaser.Scene {
+    
+    /**
+     * Constructor for Tutorial
+     * @param null
+     * @return null
+    **/
     constructor() {
         super({
             key: 'Level'
@@ -16,21 +22,31 @@ export default class Tutorial extends Phaser.Scene {
         });
         this.stage = 0;
     }
-
+    
+    /**
+     * Preload for Tutorial
+     * @param null
+     * @return null
+    **/
     preload() {
         chica.preload(this);
         bbb.preload(this);
-        this.load.image('map', './levels/amnesia.png');
+        this.load.image('map', './levels/amnesia/amnesia.png');
     }
-
+    
+    /**
+     * Create for Tutorial
+     * Calls chica.createInBattle() and combat.createCombat(), which creates the enemy
+     * @param null
+     * @return null
+    **/
     create() {
         let map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
-
         
         this.scene.add('Hud', Hud);
         chica.createInBattle(this);
         combat.createCombat(this, chica, bbb);
-        this.createKeyControls();
+        //this.createKeyControls();
         this.scene.add('Dialogue', new Dialogue([{
                 char: 'Tiny Box Tim',
                 text: 'Chica? Do you even know how to fight?'
@@ -50,17 +66,28 @@ export default class Tutorial extends Phaser.Scene {
         ]));
         this.dialogScene = this.scene.get('Dialogue');
     }
-
+    
+    /**
+     * Update for Tutorial
+     * Calls chica.updateInBattle() and bbb.updateInBattle()
+     * @param null
+     * @return null
+    **/
     update() {
         chica.updateInBattle(this);
         bbb.updateInBattle(this);
     }
-
+    
+    /**
+     * Sets up the dialogue train for this scene
+     * @param null
+     * @return null
+    **/
     createKeyControls() {
         const _this = this;
-        this.input.keyboard.once('keydown_THREE', function() {
+        this.input.keyboard.once('keydown_ENTER', function() {
+                                                            console.log(this.stage);
             if (this.stage === 1) {
-
                 combat.newRound(this, 'Defend');
                 this.input.keyboard.once('keydown_ENTER', function() {
                     this.scene.add('Dialogue', new Dialogue([{
@@ -73,7 +100,7 @@ export default class Tutorial extends Phaser.Scene {
                         },
                     ]));
 
-                    this.input.keyboard.once('keydown_ONE', function() {
+                    this.input.keyboard.once('keydown_ENTER', function() {
                         if (this.stage === 3) {
 
                             combat.newRound(_this, 'Whap');
@@ -89,7 +116,7 @@ export default class Tutorial extends Phaser.Scene {
                                     },
                                 ]));
 
-                                this.input.keyboard.once('keydown_FOUR', function() {
+                                this.input.keyboard.once('keydown_ENTER', function() {
                                     if (this.stage === 5) {
                                         combat.newRound(_this, 'Doggie Treat');
                                         this.input.keyboard.once('keydown_ENTER', function() {
@@ -107,7 +134,7 @@ export default class Tutorial extends Phaser.Scene {
                                                 },
                                             ]));
 
-                                            this.input.keyboard.once('keydown_TWO', function() {
+                                            this.input.keyboard.once('keydown_ENTER', function() {
                                                 if (this.stage === 7) {
                                                     combat.newRound(_this, 'Cuteness');
 

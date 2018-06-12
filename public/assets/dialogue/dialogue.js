@@ -1,6 +1,12 @@
 //JS module for the Dialogue Scene
 
 class Dialogue extends Phaser.Scene {
+    
+    /**
+     * Constructor for Dialogue
+     * @param null
+     * @return null
+    **/
     constructor(dialogList, color = 0x009900) {
         super({
             key: 'Dialogue'
@@ -13,9 +19,12 @@ class Dialogue extends Phaser.Scene {
         this.dialogIndex = 0;
         this.color = color;
     }
-
-    preload() {}
-
+    
+    /**
+     * Create function for Dialogue
+     * @param null
+     * @return null
+    **/
     create() {
         //Create shorthand variables and set up stuff
         const height = this.sys.game.config.height;
@@ -57,13 +66,14 @@ class Dialogue extends Phaser.Scene {
         }).setOrigin(1, 1);
 
         //Load first line of dialogue
-        this.loadDialogue(this.dialogList[this.dialogIndex].char, this.dialogList[0].text);
+        this.loadDialogue();
     }
-
-    update() {
-
-    }
-
+    
+    /**
+     * Updates the dialogue in the dialogue box. or closes the dialogue popup
+     * @param null
+     * @return null
+    **/
     loadDialogue() {
         if (this.dialogIndex < this.dialogList.length) {
             this.text.setText(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text }`);
