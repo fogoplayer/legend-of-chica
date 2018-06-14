@@ -34,8 +34,8 @@ export default class Intro extends Phaser.Scene {
      * @param null
      * @return null
     **/
-    create() {
-        this.dialogue = this.scene.add('Dialogue', new Dialogue([
+    async create() {
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: 'Narrator',
                 text: 'Hello [player name], and welcome to “The Legend of Chica: Golden Guardian”!',
@@ -48,11 +48,17 @@ export default class Intro extends Phaser.Scene {
                 char: 'Narrator',
                 text: 'That being said, we hope you enjoy the game. See you in the party room!',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 //TODO end dialogue scene, start music, then restart dialogue scene
                 char: '[Music note]',
                 text: '[Mark’s Theme]',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: 'Mark',
                 text: '…and for all of you that just recently came on to the stream, I’d like to remind you all that this is a charity stream.',
@@ -65,10 +71,16 @@ export default class Intro extends Phaser.Scene {
                 char: 'Mark',
                 text: 'That’s right, Chica! All proceeds will be going towards the Brain and Behavior Research Foundation to help fund research to alleviate mental illness. There are links in the des-',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: '[MUSIC NOTE]',
                 text: '[Bridgett’s Theme]',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: 'Bridgett',
                 text: '(crashes through a window) OH, MARKIMOOOOOOOO! YOUR NUMBER ONE FAN IS HERE!!!',
@@ -97,10 +109,45 @@ export default class Intro extends Phaser.Scene {
                 char: 'Bridgett',
                 text: 'Oh, that witch? I took care of her. She won’t get in between us again.',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: '[ART NOTE]',
                 text: '[Chica and Mark are shook]',
             },
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+        
+        await Dialogue.dialogueConstructorWithPromise(this, [
+            
+        ]);
+            
+            
+            
             {
                 char: 'Mark',
                 text: 'What… what did you do to Amy?!?',
@@ -149,8 +196,8 @@ export default class Intro extends Phaser.Scene {
                 char: 'Mark',
                 text: 'CHICA, NOOOOOOOOO!'
             }
-        ]));
         
+        console.log(1);
         this.events.once('startNextLevel', () => {
             this.scene.manager.remove('Level');
             setTimeout(() => {

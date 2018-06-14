@@ -4,7 +4,8 @@ class Dialogue extends Phaser.Scene {
     
     /**
      * Constructor for Dialogue
-     * @param null
+     * @param DialogList-an array of objects with one property, `char`, for the character name and one property, `text`, for the spoken text.
+     * @param color-(Optional) a way to specify a hex code for the dialogue popup.
      * @return null
     **/
     constructor(dialogList, color = 0x009900) {
@@ -18,6 +19,27 @@ class Dialogue extends Phaser.Scene {
         this.dialogList = dialogList;
         this.dialogIndex = 0;
         this.color = color;
+    }
+    
+    /**
+     * Code to create Dialogue inside a promise
+     * Since the dialogue system now uses async/await,
+     * I wanted an async function that invoked the Dialog
+     * constructor and returned a promise, just to simplify
+     * implementation.
+     * @param scene-the current scene
+     * @param dialogList-an array of objects with one property, `char`, for the character name and one property, `text`, for the spoken text.
+     * @param color-(Optional) a way to specify a hex code for the dialogue popup.
+     * @return Promise
+    **/
+    static dialogueConstructorWithPromise(scene, dialogList, color = 0x009900){
+        return new Promise((resolve,reject) => {
+            let dialogue = scene.scene.manager.add('Dialogue', new Dialogue(dialogList, color));
+            
+            dialogue.events.on('dialogueEnd',function(){
+                resolve("Success");
+            });
+        });
     }
     
     /**
@@ -87,6 +109,7 @@ class Dialogue extends Phaser.Scene {
             this.scene.get('Level').stage++;
             this.scene.manager.remove('Dialogue');
             console.log('Dialogue Terminated. Stage ' + this.scene.get('Level').stage);
+            this.events.emit('dialogueEnd');
         }
 
     }
