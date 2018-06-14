@@ -49,7 +49,7 @@ export default class Intro extends Phaser.Scene {
                 text: 'That being said, we hope you enjoy the game. See you in the party room!',
             },
         ]);
-        
+                                                                                                            alert('Whaaaaaaat? code running in the middle of dialogue?');
         await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 //TODO end dialogue scene, start music, then restart dialogue scene
@@ -109,45 +109,10 @@ export default class Intro extends Phaser.Scene {
                 char: 'Bridgett',
                 text: 'Oh, that witch? I took care of her. She won’t get in between us again.',
             },
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: '[ART NOTE]',
                 text: '[Chica and Mark are shook]',
             },
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            
-        ]);
-            
-            
-            
             {
                 char: 'Mark',
                 text: 'What… what did you do to Amy?!?',
@@ -196,27 +161,12 @@ export default class Intro extends Phaser.Scene {
                 char: 'Mark',
                 text: 'CHICA, NOOOOOOOOO!'
             }
+        ]);
         
-        console.log(1);
-        this.events.once('startNextLevel', () => {
-            this.scene.manager.remove('Level');
-            setTimeout(() => {
-                console.log(this);
-                this.scene.add('Amnesia', new Amnesia());
-            },100);
-        });
-    }
-    
-    /**
-     * Update for Amnesia
-     * Calls bbb.updateInWorld() and tbt.updateInWorld()
-     * Chica has no updateInWorld function because (right now at least) movement is handled by her createInWorld() function
-     * @param null
-     * @return null
-    **/
-    update() {
-        if(this.stage === 1){
-            this.events.emit('startNextLevel');
-        }
+        this.scene.manager.remove('Level');
+        setTimeout(() => {
+            console.log(this);
+            this.scene.add('Amnesia', new Amnesia());
+        },100);
     }
 }
