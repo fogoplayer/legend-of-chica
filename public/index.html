@@ -6,7 +6,6 @@
         <script type="module">
             import storage from './systems/storage.js';
             storage.initialize();
-                                            console.log( typeof `./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`);
             const level = import(`./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`)
             
             level.then(startGame);
@@ -26,10 +25,7 @@
                     },
                     scene: [level]
                 };
-                                                                                console.log(2);
-                                                            console.log(level);
                 let game = new Phaser.Game(config);
-                                                                                console.log(3);
             }
         </script>
         <style>
