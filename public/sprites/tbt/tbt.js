@@ -42,10 +42,6 @@ const tbt = {
         _this.tbt = _this.physics.add.sprite(x, y, 'tbt').setScale(.25);
         _this.tbt.setOrigin(0.5,0.5);
         _this.tbt.setCollideWorldBounds(false);
-        /*chica.createAnimations(_this);
-        _this.chica.anims.play('turn');
-        
-        chica.createKeyboardControls(_this);*/
     },
     
     /**
