@@ -4,24 +4,33 @@
         <title>The Legend of Chica: Golden Guardian</title>
         <script src="phaser.min.js"></script>
         <script type="module">
-            import Intro from './levels/intro/intro.js';
-            import Amnesia from './levels/amnesia/amnesia.js';               //Development purposes only
-            import Tutorial from './levels/tutorial/tutorial.js';               //Development purposes only
+            import storage from './systems/storage.js';
+            storage.initialize();
+                                            console.log( typeof `./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`);
+            const level = import(`./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`)
             
-            let config = {
-                type:Phaser.AUTO,
-                width:512*1.5,
-                height:512*1.5,
-                physics: {
-                    default:'arcade',
-                    arcade:{
-                        gravity:{ y: 0, x: 0, }
-                    }
-                },
-                scene: [ Intro ]                                             //Change back to Intro
-            };
+            level.then(startGame);
             
-            let game = new Phaser.Game(config);
+            function startGame(level){
+                level = new level.default();
+                
+                let config = {
+                    type: Phaser.AUTO,
+                    width: 512 * 1.5,
+                    height: 512 * 1.5,
+                    physics: {
+                        default: 'arcade',
+                        arcade: {
+                            gravity: { y: 0, x: 0, }
+                        }
+                    },
+                    scene: [level]
+                };
+                                                                                console.log(2);
+                                                            console.log(level);
+                let game = new Phaser.Game(config);
+                                                                                console.log(3);
+            }
         </script>
         <style>
             body {
