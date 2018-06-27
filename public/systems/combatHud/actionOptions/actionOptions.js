@@ -1,6 +1,6 @@
 //JS Module to display attacks during combta
 import chica from '../../../sprites/chica/chica.js';
-import combat from '../../combat/combat.js';
+import combat from '../../combat.js';
 
 const actionOptions = {
     /**
@@ -117,7 +117,7 @@ const actionOptions = {
      * @return null
     **/
     selectInMenu(_this, index, parentIndex){
-        
+        console.log(_this, index, parentIndex)
         const length = this.actionsGroup.getLength();
         
         //Remove old listeners

@@ -3,7 +3,7 @@ import chica from '../../sprites/chica/chica.js';
 import bbb from '../../sprites/bbb/bbb.js';
 import tbt from '../../sprites/tbt/tbt.js';
 
-import Dialogue from '../../assets/dialogue/dialogue.js';
+import Dialogue from '../../systems/dialogue.js';
 
 import Tutorial from '../../levels/tutorial/tutorial.js';
 

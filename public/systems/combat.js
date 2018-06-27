@@ -1,5 +1,5 @@
 //JS Module for combat system
-import Dialogue from '../dialogue/dialogue.js';
+import Dialogue from './dialogue.js';
 
 const combat = {
     /**

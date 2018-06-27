@@ -1,5 +1,5 @@
 //JS module for the amnesia Scene
-import Dialogue from '../../assets/dialogue/dialogue.js';
+import Dialogue from '../../systems/dialogue.js';
 
 import Amnesia from '../amnesia/amnesia.js';
 

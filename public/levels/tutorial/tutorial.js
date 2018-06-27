@@ -2,11 +2,12 @@
 import chica from '../../sprites/chica/chica.js';
 import bbb from '../../sprites/bbb/bbb.js';
 
-import Hud from '../../assets/combatHud/combatHud.js';
-import Dialogue from '../../assets/dialogue/dialogue.js';
-import combat from '../../assets/combat/combat.js';
+import Hud from '../../systems/combatHud/combatHud.js';
+import actionOptions from '../../systems/combatHud/actionOptions/actionOptions.js';
+import Dialogue from '../../systems/dialogue.js';
+import combat from '../../systems/combat.js';
 
-import Intro from '../amnesia/amnesia.js'
+import Intro from '../intro/intro.js';
 
 export default class Tutorial extends Phaser.Scene {
     
@@ -127,6 +128,15 @@ export default class Tutorial extends Phaser.Scene {
             //Make resolve callable from combat and limit action options
             combat.resolve = resolve;
             combat.attackLimiter = move;
+            //Automatically open menu
+            chica.actions.forEach((menu, menuIndex) => {
+                const actionIndex = menu.children.findIndex((action)=> action.name === move);
+                if (actionIndex >= 0){
+                    console.log(this);
+                    actionOptions.openMenu(this.scene.manager.getScene('Hud'), menuIndex);
+                    actionOptions.selectInMenu(this.scene.manager.getScene('Hud'), actionIndex, menuIndex);
+                }
+            });
         });
     }
 }
