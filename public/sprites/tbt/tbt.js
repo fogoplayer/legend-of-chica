@@ -57,7 +57,7 @@ const tbt = {
     updateInWorld(_this){
         if(_this.tbt){
             if (_this.tbt.x > _this.sceneWidth / 2 + 50) {
-                _this.tbt.setVelocityX(-80);
+                _this.tbt.setVelocityX(-160);
             }else{
                 _this.tbt.setVelocity(0, 0);
             }

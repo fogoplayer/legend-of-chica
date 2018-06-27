@@ -83,7 +83,7 @@ const bbb = {
     updateInWorld(_this){
         if(_this.bbb){
             if (_this.bbb.x > _this.sceneWidth / 2 + 200) {
-                _this.bbb.setVelocityX(-80);
+                _this.bbb.setVelocityX(-160);
             }else{
                 _this.bbb.setVelocity(0, 0);
                 _this.events.emit('inPosition');
