@@ -1,6 +1,6 @@
 //JS module for rememembering user data between sessions/levels
 
-const storage = {
+const system = {
     
     /**
      * Initialize storage object

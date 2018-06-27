@@ -4,8 +4,8 @@
         <title>The Legend of Chica: Golden Guardian</title>
         <script src="phaser.min.js"></script>
         <script type="module">
-            import storage from './systems/storage.js';
-            storage.initialize();
+            import system from './systems/system.js';
+            system.initialize();
             const level = import(`./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`)
             
             level.then(startGame);
