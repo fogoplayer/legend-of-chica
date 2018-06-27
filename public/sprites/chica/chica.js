@@ -17,7 +17,7 @@ const chica = {
             name:"Attack",
             children:[
                 {
-                    name: "Whap",
+                    name: "Tail Whap",
                     dealsDamage: 17,
                     reducesDamage: 0,
                     restoresHealth: 0

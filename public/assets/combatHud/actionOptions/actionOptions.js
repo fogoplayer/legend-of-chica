@@ -170,68 +170,6 @@ const actionOptions = {
         }catch(e){console.warn(e)}
     },
     
-    /**
-     * Temporarily create fake data to simplify developing menus.
-     * TODO Delete when done
-    **/
-    generateFakeData(){
-        return [
-            {
-                name:"Attack",
-                children:[
-                    {
-                        name: "Whap",
-                        dealsDamage: 17,
-                        reducesDamage: 0,
-                        restoresHealth: 0
-                    },
-                ]
-            },
-            
-            {
-                name:"Defend",
-                children:[
-                    {
-                        name: "Defend",
-                        dealsDamage: 0,
-                        reducesDamage: 9,
-                        restoresHealth: 0,
-                    },
-                ]
-            },
-            
-            {
-                name:"Special",
-                children:[
-            
-                    {
-                        name: "Cuteness",
-                        dealsDamage: 8,
-                        reducesDamage: 0,
-                        restoresHealth: 7,
-                    },
-            
-                    {
-                        name: 'Doggie Treat',
-                        dealsDamage: 0,
-                        reducesDamage: 0,
-                        restoresHealth: 15,
-                    }
-                ]
-            },
-            
-            {
-                name:"Items",
-                children:[
-                    {
-                        name:"Nothing to see here!"
-                    }
-                ]
-            },
-            
-            
-        ]
-    }
 };
 
 export default actionOptions;
