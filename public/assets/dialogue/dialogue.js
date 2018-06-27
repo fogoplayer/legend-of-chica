@@ -35,10 +35,7 @@ class Dialogue extends Phaser.Scene {
     static dialogueConstructorWithPromise(scene, dialogList, color = 0x009900){
         return new Promise((resolve,reject) => {
             let dialogue = scene.scene.manager.add('Dialogue', new Dialogue(dialogList, color));
-            
-            dialogue.events.on('dialogueEnd',function(){
-                resolve("Success");
-            });
+            dialogue.resolve = resolve;
         });
     }
     
@@ -106,10 +103,9 @@ class Dialogue extends Phaser.Scene {
         else {
             this.input.keyboard.removeAllListeners('keydown_ENTER');
             this.scene.manager.resume('Level');
-            this.scene.get('Level').stage++;
             this.scene.manager.remove('Dialogue');
-            console.log('Dialogue Terminated. Stage ' + this.scene.get('Level').stage);
-            this.events.emit('dialogueEnd');
+            console.log('Dialogue Terminated.');
+            this.resolve ? this.resolve() : null;
         }
 
     }

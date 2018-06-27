@@ -5,7 +5,8 @@
         <script src="phaser.min.js"></script>
         <script type="module">
             import Intro from './levels/intro/intro.js';
-            //import Tutorial from './levels/tutorial/tutorial.js';               //Development purposes only
+            import Amnesia from './levels/amnesia/amnesia.js';               //Development purposes only
+            import Tutorial from './levels/tutorial/tutorial.js';               //Development purposes only
             
             let config = {
                 type:Phaser.AUTO,
@@ -17,7 +18,7 @@
                         gravity:{ y: 0, x: 0, }
                     }
                 },
-                scene: [ Intro ]                                             //Change back to Amnesia
+                scene: [ Tutorial ]                                             //Change back to Intro
             };
             
             let game = new Phaser.Game(config);

@@ -16,6 +16,7 @@ const combat = {
         this.player = player;
         this.enemies = enemies;
         this.displayEnemies(_this);
+        this.attackLimiter = undefined;
     },
     
     /**
@@ -38,7 +39,9 @@ const combat = {
      * @param playerAttack-the attack the player chose
      * @param enemy-the index of the enemy being attacked. Defaults to 0.
     **/
-    newRound(_this, playerAttack, enemy = 0) {
+    async newRound(_this, playerAttack, enemy = 0) {
+        if(this.attackLimiter && playerAttack.name !== this.attackLimiter){ return console.log("Not the right attack"); }
+        
         //Define a single enemy
         this.enemy = this.enemies[enemy];
 
@@ -63,8 +66,14 @@ const combat = {
         }
         
         this.player.updateInBattle();
+        this.enemy.updateInBattle();
+        
         //Create Dialogue to display results
-        _this.scene.add('Dialogue', new Dialogue([{char: 'Combat', text: `${ this.enemy.name } used ${ enemyAttack.name.toUpperCase() }\n${ this.player.name } took ${ -playerAttack.restoresHealth - playerAttack.reducesDamage + enemyAttack.dealsDamage } points of damage\n\n${ this.player.name } used ${playerAttack.name.toUpperCase() }\n${ this.enemy.name } took ${ -enemyAttack.restoresHealth - enemyAttack.reducesDamage + playerAttack.dealsDamage } points of damage\n`}, ], 0x8888ff));
+        await Dialogue.dialogueConstructorWithPromise(_this,[{char: 'Combat', text: `${ this.enemy.name } used ${ enemyAttack.name.toUpperCase() }\n${ this.player.name } took ${ -playerAttack.restoresHealth - playerAttack.reducesDamage + enemyAttack.dealsDamage } points of damage\n\n${ this.player.name } used ${playerAttack.name.toUpperCase() }\n${ this.enemy.name } took ${ -enemyAttack.restoresHealth - enemyAttack.reducesDamage + playerAttack.dealsDamage } points of damage\n`}, ], 0x8888ff);
+        
+        this.attackLimiter = undefined;
+        
+        this.resolve ? this.resolve() : null;
     },
 };
 

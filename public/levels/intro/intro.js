@@ -1,5 +1,6 @@
 //JS module for the amnesia Scene
 import Dialogue from '../../assets/dialogue/dialogue.js';
+
 import Amnesia from '../amnesia/amnesia.js';
 
 export default class Intro extends Phaser.Scene {
@@ -17,7 +18,6 @@ export default class Intro extends Phaser.Scene {
             key: 'Level',
             active: true
         });
-        this.stage = 0;
     }
     
     /**
@@ -167,6 +167,6 @@ export default class Intro extends Phaser.Scene {
         setTimeout(() => {
             console.log(this);
             this.scene.add('Amnesia', new Amnesia());
-        },100);
+        },1);
     }
 }

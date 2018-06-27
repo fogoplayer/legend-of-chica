@@ -20,8 +20,6 @@ const actionOptions = {
         graphics.lineStyle(1, 0xffffff);
         graphics.lineBetween(gameWidth - cellWidth, gameHeight * 2 / 3, gameWidth - cellWidth, gameHeight);
         
-        
-        //const actions = chica.actions;
         const actions = chica.actions;
         this.categoriesGroup = _this.add.group();
         const nOfOptions = actions.length;
