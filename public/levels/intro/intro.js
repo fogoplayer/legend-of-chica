@@ -26,7 +26,7 @@ export default class Intro extends Phaser.Scene {
      * @return null
     **/
     preload() {
-
+        this.load.audio('mark', './music/mark1.mp3');
     }
     
     /**
@@ -49,14 +49,8 @@ export default class Intro extends Phaser.Scene {
                 text: 'That being said, we hope you enjoy the game. See you in the party room!',
             },
         ]);
-                                                                                                            alert('Whaaaaaaat? code running in the middle of dialogue?');
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
-                //TODO end dialogue scene, start music, then restart dialogue scene
-                char: '[Music note]',
-                text: '[Mark’s Theme]',
-            },
-        ]);
+        
+        this.sound.add('mark').play({ loop: true, });
         
         await Dialogue.dialogueConstructorWithPromise(this, [
             {
