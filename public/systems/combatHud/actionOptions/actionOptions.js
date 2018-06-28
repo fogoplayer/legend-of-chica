@@ -118,7 +118,6 @@ const actionOptions = {
      * @return null
     **/
     selectInMenu(_this, index, parentIndex){
-        console.log(_this, index, parentIndex)
         const length = this.actionsGroup.getLength();
         
         //Remove old listeners

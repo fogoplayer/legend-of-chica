@@ -42,7 +42,7 @@ const combat = {
      * @param enemy-the index of the enemy being attacked. Defaults to 0.
     **/
     async newRound(_this, playerAttack, enemy = 0) {
-        if(this.attackLimiter && playerAttack.name !== this.attackLimiter){ return console.log("Not the right attack"); }
+        if(this.attackLimiter && playerAttack.name !== this.attackLimiter){ return; }
         
         //Define a single enemy
         this.enemy = this.enemies[enemy];

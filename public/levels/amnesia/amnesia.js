@@ -72,8 +72,7 @@ export default class Amnesia extends Phaser.Scene {
                 tbt.createInWorld(this, this.sceneWidth + 50, this.sceneHeight / 2);
                 
                 this.events.on('inPosition',function(){
-                    console.log('Success');
-                    resolve('Success');
+                    resolve();
                 });
             });
         })();

@@ -61,12 +61,12 @@ const level = {
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
         //_this.sound.pause();
         _this.scene.manager.remove('Level');
-        //system.userData.currentLevel = newLevel;
+        system.userData.currentLevel = newLevel;
         setTimeout(() => {
             _this.scene.manager.add(newLevel, window[newLevel]).children;
         },1);
-        
         system.save();
+        console.clear();
     }
 };
 

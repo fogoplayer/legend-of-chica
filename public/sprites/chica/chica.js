@@ -128,10 +128,6 @@ const chica = {
      * @return null
     **/
     updateInBattle() {
-        /*console.log("HP:" + this.stats.hp);
-        console.log("StatsText:", this.statsText);
-        this.statsText.setBackgroundColor("#000000")
-        this.statsText.setText("Hello");*/
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`);
     },
     

@@ -123,7 +123,6 @@ export default class Tutorial extends Phaser.Scene {
      * @return Promise
     **/
     combatAcceptsOnly(move){
-        console.log(actionOptions);
         return new Promise((resolve, reject) => {
             //Make resolve callable from combat and limit action options
             combat.resolve = resolve;
@@ -132,7 +131,6 @@ export default class Tutorial extends Phaser.Scene {
             chica.actions.forEach((menu, menuIndex) => {
                 const actionIndex = menu.children.findIndex((action)=> action.name === move);
                 if (actionIndex >= 0){
-                    console.log(this);
                     actionOptions.openMenu(this.scene.manager.getScene('Hud'), menuIndex);
                     actionOptions.selectInMenu(this.scene.manager.getScene('Hud'), actionIndex, menuIndex);
                 }
