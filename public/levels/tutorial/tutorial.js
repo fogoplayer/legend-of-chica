@@ -1,13 +1,15 @@
 //JS module for the tutorial Scene
+
+import level from '../level.js';
 import chica from '../../sprites/chica/chica.js';
 import bbb from '../../sprites/bbb/bbb.js';
 
-import Hud from '../../systems/combatHud/combatHud.js';
-import actionOptions from '../../systems/combatHud/actionOptions/actionOptions.js';
-import Dialogue from '../../systems/dialogue.js';
-import combat from '../../systems/combat.js';
+// import Hud from '../../systems/combatHud/combatHud.js';
+// import actionOptions from '../../systems/combatHud/actionOptions/actionOptions.js';
+// import Dialogue from '../../systems/dialogue.js';
+// import combat from '../../systems/combat.js';
 
-import Intro from '../intro/intro.js';
+// import Intro from '../intro/intro.js';
 
 export default class Tutorial extends Phaser.Scene {
     
@@ -20,10 +22,7 @@ export default class Tutorial extends Phaser.Scene {
         super({
             key: 'Level'
         });
-        Phaser.Scene.call(this, {
-            key: 'Level',
-            active: true
-        });
+        level.initialize(this, 'battle');
     }
     
     /**
@@ -124,6 +123,7 @@ export default class Tutorial extends Phaser.Scene {
      * @return Promise
     **/
     combatAcceptsOnly(move){
+        console.log(actionOptions);
         return new Promise((resolve, reject) => {
             //Make resolve callable from combat and limit action options
             combat.resolve = resolve;

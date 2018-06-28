@@ -2,6 +2,8 @@
 import Dialogue from './dialogue.js';
 
 const combat = {
+    name:'combat',
+    
     /**
      * Sets up combat
      * @param _this-the scene object

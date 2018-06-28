@@ -1,11 +1,10 @@
 //JS module for the amnesia Scene
+
+import level from '../level.js';
+
 import chica from '../../sprites/chica/chica.js';
 import bbb from '../../sprites/bbb/bbb.js';
 import tbt from '../../sprites/tbt/tbt.js';
-
-import Dialogue from '../../systems/dialogue.js';
-
-import Tutorial from '../../levels/tutorial/tutorial.js';
 
 export default class Amnesia extends Phaser.Scene {
     
@@ -18,10 +17,7 @@ export default class Amnesia extends Phaser.Scene {
         super({
             key: 'Level'
         });
-        Phaser.Scene.call(this, {
-            key: 'Level',
-            active: true
-        });
+        level.initialize(this);
     }
     
     /**
@@ -29,7 +25,7 @@ export default class Amnesia extends Phaser.Scene {
      * @param null
      * @return null
     **/
-    preload() {
+    async preload() {
         chica.preload(this);
         bbb.preload(this);
         tbt.preload(this);
@@ -42,6 +38,8 @@ export default class Amnesia extends Phaser.Scene {
      * @return null
     **/
     async create() {
+        
+        
         let map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
         
         const _this = this;
@@ -91,11 +89,7 @@ export default class Amnesia extends Phaser.Scene {
             },
         ]);
         
-        _this.scene.manager.remove('Level');
-        setTimeout(function(){
-            console.log(_this);
-            _this.scene.add('Tutorial', new Tutorial());
-        },1);
+        level.changeLevel('Tutorial', this);
     }
     
     /**

@@ -2,16 +2,15 @@
 <html>
     <head>
         <title>The Legend of Chica: Golden Guardian</title>
-        <script src="phaser.min.js"></script>
+        <script src="phaser.js"></script>
         <script type="module">
             import system from './systems/system.js';
             system.initialize();
-            const level = import(`./levels/${ storage.userData.currentLevel.toLowerCase() }/${ storage.userData.currentLevel.toLowerCase() }.js`)
+            const level = system.addModules([`../levels/${ system.userData.currentLevel.toLowerCase() }/${ system.userData.currentLevel.toLowerCase() }.js`])
             
             level.then(startGame);
             
             function startGame(level){
-                level = new level.default();
                 
                 let config = {
                     type: Phaser.AUTO,
@@ -23,7 +22,7 @@
                             gravity: { y: 0, x: 0, }
                         }
                     },
-                    scene: [level]
+                    scene: [window[system.userData.currentLevel]]
                 };
                 let game = new Phaser.Game(config);
             }

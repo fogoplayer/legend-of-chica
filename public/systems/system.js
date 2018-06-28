@@ -35,7 +35,29 @@ const system = {
      **/
     save() {
         window.localStorage.userData = JSON.stringify(this.userData);
+    },
+    
+    /**
+     * Dynamically add modules to the global scope
+     * @param urlArray-an array of URLs to dynamically import
+     * @return null
+    **/
+    async addModules(urlArray){
+        let importArray = await Promise.all(urlArray.map(url => {
+            return import(url);
+        }));
+                
+        //Add the modules to the global scope
+        importArray.forEach(i => {
+            let module;
+            module = i.default;
+            
+            if(!window[i.default.name]){
+                console.log('Added', i.default.name);
+                window[i.default.name] = module;
+            }
+        });
     }
 };
 
-export default storage;
+export default system;

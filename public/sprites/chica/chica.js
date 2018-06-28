@@ -2,8 +2,8 @@
 
 const chica = {
 
-    shortName: 'chica',
-    name: 'Chica',
+    name: 'chica',
+    displayName: 'Chica',
 
     stats: {
         hp: 20,
@@ -89,8 +89,8 @@ const chica = {
         _this.chica.setOrigin(0.5, 0.5);
         _this.chica.setCollideWorldBounds(true);
 
-        chica.createAnimations(_this);
-        _this.chica.anims.play('turn');
+        /*chica.createAnimations(_this);
+        _this.chica.anims.play('turn');*/
 
         chica.createKeyboardControlsInWorld(_this);
     },

@@ -3,6 +3,7 @@ import chica from '../../../sprites/chica/chica.js';
 import combat from '../../combat.js';
 
 const actionOptions = {
+    name:'actionOptions',
     /**
      * Constructor for ActionOptions
      * @param _this-the scene calling the function

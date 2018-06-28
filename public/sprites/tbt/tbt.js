@@ -2,8 +2,8 @@
 
 const tbt = {
 
-    shortName: 'tbt',
-    name: 'Tiny Box Tim',
+    name: 'tbt',
+    displayName: 'Tiny Box Tim',
 
     stats: {
         hp: 20,

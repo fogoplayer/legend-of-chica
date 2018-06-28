@@ -1,7 +1,10 @@
 //JS module for the amnesia Scene
-import Dialogue from '../../systems/dialogue.js';
 
-import Amnesia from '../amnesia/amnesia.js';
+import level from '../level.js';
+
+import chica from '../../sprites/chica/chica.js';
+import bbb from '../../sprites/bbb/bbb.js';
+import tbt from '../../sprites/tbt/tbt.js';
 
 export default class Intro extends Phaser.Scene {
     
@@ -14,10 +17,7 @@ export default class Intro extends Phaser.Scene {
         super({
             key: 'Level'
         });
-        Phaser.Scene.call(this, {
-            key: 'Level',
-            active: true
-        });
+        level.initialize(this);
     }
     
     /**
@@ -35,6 +35,7 @@ export default class Intro extends Phaser.Scene {
      * @return null
     **/
     async create() {
+        
         await Dialogue.dialogueConstructorWithPromise(this, [
             {
                 char: 'Narrator',
@@ -157,10 +158,6 @@ export default class Intro extends Phaser.Scene {
             }
         ]);
         
-        this.scene.manager.remove('Level');
-        setTimeout(() => {
-            console.log(this);
-            this.scene.add('Amnesia', new Amnesia());
-        },1);
+        level.changeLevel('Amnesia', this);
     }
 }

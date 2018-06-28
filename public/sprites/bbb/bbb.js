@@ -2,8 +2,8 @@
 
 const bbb = {
     
-    shortName: 'bbb',
-    name: 'Big Box Barry',
+    name: 'bbb',
+    displayName: 'Big Box Barry',
 
     stats: {
         hp: 20,
