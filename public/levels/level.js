@@ -31,7 +31,15 @@ const level = {
         await system.addModules(moduleList)
     },
     
-    loadModules: async (_this, chars = [], levelType = undefined) => {
+    /**
+     * Loads in dependencies
+     * NOT CURRENTLY IN USE
+     * May be needed to add dynamic character module imports
+     * @param _this-The current scene
+     * @param chars-an array of characters to import for the level
+     * @param levelType-The type of level (world/battle)
+    **/
+    /*loadModules: async (_this, chars = [], levelType = undefined) => {
         
         //Modules that every level uses
         let moduleList = ['../systems/dialogue.js'];
@@ -55,8 +63,13 @@ const level = {
         }));
         
         await system.addModules(moduleList)
-    },
+    },*/
     
+    /**
+     * Changes the current level
+     * @param newLevel-the key of the level to be added
+     * @param _this-the current scene object
+    **/
     changeLevel: async (newLevel, _this) => {
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
         //_this.sound.pause();
