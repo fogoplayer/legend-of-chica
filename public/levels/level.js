@@ -39,31 +39,31 @@ const level = {
      * @param chars-an array of characters to import for the level
      * @param levelType-The type of level (world/battle)
     **/
-    /*loadModules: async (_this, chars = [], levelType = undefined) => {
+    // loadModules: async (_this, chars = [], levelType = undefined) => {
         
-        //Modules that every level uses
-        let moduleList = ['../systems/dialogue.js'];
+    //     //Modules that every level uses
+    //     let moduleList = ['../systems/dialogue.js'];
         
-        //Modules used for specific level types
-        if(levelType === 'world'){
+    //     //Modules used for specific level types
+    //     if(levelType === 'world'){
             
-        }
-        if(levelType === 'battle'){
-            moduleList = moduleList.concat([
-                '../systems/combatHud/combatHud.js',
-                '../systems/combatHud/actionOptions/actionOptions.js',
-                '../systems/combat.js'
-            ]);
-        }
+    //     }
+    //     if(levelType === 'battle'){
+    //         moduleList = moduleList.concat([
+    //             '../systems/combatHud/combatHud.js',
+    //             '../systems/combatHud/actionOptions/actionOptions.js',
+    //             '../systems/combat.js'
+    //         ]);
+    //     }
         
-        //Character modules
-        (typeof chars !== 'object') ? chars = [chars] : null;
-        moduleList = moduleList.concat(chars.map((char) => {
-            return `../sprites/${ char.toLowerCase() }/${ char.toLowerCase() }.js`;
-        }));
+    //     //Character modules
+    //     (typeof chars !== 'object') ? chars = [chars] : null;
+    //     moduleList = moduleList.concat(chars.map((char) => {
+    //         return `../sprites/${ char.toLowerCase() }/${ char.toLowerCase() }.js`;
+    //     }));
         
-        await system.addModules(moduleList)
-    },*/
+    //     await system.addModules(moduleList)
+    // },
     
     /**
      * Changes the current level
@@ -71,13 +71,15 @@ const level = {
      * @param _this-the current scene object
     **/
     changeLevel: async (newLevel, _this) => {
+        _this.sound.sounds.forEach(sound => { sound.destroy() });
+        
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
-        //_this.sound.pause();
         _this.scene.manager.remove('Level');
         system.userData.currentLevel = newLevel;
         setTimeout(() => {
-            _this.scene.manager.add(newLevel, window[newLevel]).children;
+            _this.scene.manager.add(newLevel, window[newLevel]);
         },1);
+        
         system.save();
         console.clear();
     }
