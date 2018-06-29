@@ -74,7 +74,10 @@ const level = {
         _this.sound.sounds.forEach(sound => { sound.destroy() });
         
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
-        _this.scene.manager.remove('Level');
+        let scenes = _this.scene.manager.scenes
+        while (scenes.length > 0){
+            _this.scene.manager.remove(scenes[0].scene.key);
+        };
         system.userData.currentLevel = newLevel;
         setTimeout(() => {
             _this.scene.manager.add(newLevel, window[newLevel]);
