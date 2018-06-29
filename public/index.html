@@ -14,6 +14,7 @@
                 
                 let config = {
                     type: Phaser.AUTO,
+                    parent:document.getElementById('gameDiv'),
                     width: 512 * 1.5,
                     height: 512 * 1.5,
                     physics: {
@@ -31,6 +32,7 @@
             body {
                 background-color: #222;
                 display: block;
+                overflow:hidden;
                 margin: auto;
                 color:#fff;
             }
@@ -39,13 +41,25 @@
                 display: block;
                 margin: auto;
                 color:#fff;
+                height:calc(100vh - 22px );
+                max-height:100vw;
+            }
+            
+            #top-margin{
+                height:calc( 100vh / 2 - 100vw / 2 );
+                min-height:0px;
             }
         </style>
     </head>
     <body>
-        <center id='body'>
-            <h1>The Legend of Chica:</h1>
-            <h2>Golden Guardian</h2>
+        <div class='col'>
+            <center id='body'>
+            <!--<h1>The Legend of Chica:</h1>
+            <h2>Golden Guardian</h2>-->
         </center>
+        </div>
+        <div class='col'>
+            <center id = 'gameDiv'><div id='top-margin'></div></center>
+        </div>
     </body>
 </html>
