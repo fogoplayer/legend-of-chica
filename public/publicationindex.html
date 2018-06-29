@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Legend of Chica: Golden Guardian</title>
+        <script src="phaser.js"></script>
+        <script type="module">
+            import system from './systems/system.js';
+            system.initialize();
+            const level = system.addModules([`../levels/${ system.userData.currentLevel.toLowerCase() }/${ system.userData.currentLevel.toLowerCase() }.js`])
+            
+            level.then(startGame);
+            
+            function startGame(level){
+                
+                let config = {
+                    type: Phaser.AUTO,
+                    width: 512 * 1.5,
+                    height: 512 * 1.5,
+                    physics: {
+                        default: 'arcade',
+                        arcade: {
+                            gravity: { y: 0, x: 0, }
+                        }
+                    },
+                    scene: [window[system.userData.currentLevel]]
+                };
+                let game = new Phaser.Game(config);
+            }
+        </script>
+        <style>
+            body {
+                background-color: #222;
+                display: block;
+                overflow:hidden;
+                margin: auto;
+                color:#fff;
+            }
+            
+            canvas{
+                display: block;
+                margin: auto;
+                color:#fff;
+                height:100vh;
+                max-height:100vw;
+            }
+            
+            #top-margin{
+                height:calc( 100vh / 2 - 100vw / 2 );
+                min-height:0px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='top-margin'></div>
+    </body>
+</html>

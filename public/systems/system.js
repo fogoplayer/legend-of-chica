@@ -62,14 +62,14 @@ const system = {
                         }, ]
                     }, {
                         name: "Items",
-                        children: [{
+                        children:[{
                             name: 'Doggie Treat',
                             dealsDamage: 0,
                             reducesDamage: 0,
                             restoresHealth: 15,
                             supply: 1,
                             useItem: function() { this.supply-- },
-                        }]
+                        }],
                     }, ],
             
                 }
@@ -80,15 +80,17 @@ const system = {
         this.userData.player.actions[3].children.forEach(child => child.useItem = function(){ child.supply-- });
         
         //Add reset button TODO remove for final build
-        const button = document.createElement('BUTTON');
-        button.innerHTML = "RESET";
-        button.onclick = () => {
-            console.log(this);
-            this.userData = {};
-            this.save();
-            window.location = window.location;
-        };
-        document.getElementById('body').appendChild(button);
+        if(document.getElementById('body')){
+            const button = document.createElement('BUTTON');
+            button.innerHTML = "RESET";
+            button.onclick = () => {
+                console.log(this);
+                this.userData = {};
+                this.save();
+                window.location = window.location;
+            };
+            document.getElementById('body').appendChild(button);
+        }
         
         window.onbeforeunload = this.save();
     },
