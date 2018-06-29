@@ -1,5 +1,5 @@
 //JS Module for Chica
-
+import system from '../../systems/system.js';
 const chica = {
 
     name: 'chica',
@@ -11,59 +11,10 @@ const chica = {
         tp: 20,
         maxTp: 20,
     },
-
-    actions: [
-        {
-            name:"Attack",
-            children:[
-                {
-                    name: "Tail Whap",
-                    dealsDamage: 17,
-                    reducesDamage: 0,
-                    restoresHealth: 0
-                },
-            ]
-        },
-        
-        {
-            name:"Defend",
-            children:[
-                {
-                    name: "Defend",
-                    dealsDamage: 0,
-                    reducesDamage: 9,
-                    restoresHealth: 0,
-                },
-            ]
-        },
-        
-        {
-            name:"Special",
-            children:[
-        
-                {
-                    name: "Cuteness",
-                    dealsDamage: 8,
-                    reducesDamage: 0,
-                    restoresHealth: 7,
-                },
-            ]
-        },
-        
-        {
-            name:"Items",
-            children:[
-                {
-                    name: 'Doggie Treat',
-                    dealsDamage: 0,
-                    reducesDamage: 0,
-                    restoresHealth: 15,
-                }
-            ]
-        },
-        
-        
-    ],
+    
+    get actions(){
+        return system.userData.actions;
+    },
     
     /**
      * Preload for Chica

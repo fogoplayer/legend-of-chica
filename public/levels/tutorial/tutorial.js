@@ -111,10 +111,7 @@ export default class Tutorial extends Phaser.Scene {
         
         await this.combatAcceptsOnly('Cuteness');
         
-        this.scene.manager.remove('Level');
-        setTimeout(() => {
-            this.scene.add('Intro', new Intro());
-        },1);
+        level.changeLevel('Intro', this);
     }
     
     /**

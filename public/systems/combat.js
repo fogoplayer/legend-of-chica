@@ -42,17 +42,19 @@ const combat = {
      * @param enemy-the index of the enemy being attacked. Defaults to 0.
     **/
     async newRound(_this, playerAttack, enemy = 0) {
-        if(this.attackLimiter && playerAttack.name !== this.attackLimiter){ return; }
+        //If not the required attack or invalid use of an item, return without running the attack
+        if (this.attackLimiter && playerAttack.name !== this.attackLimiter){ return; }
+        if (playerAttack.supply > 0){ playerAttack.useItem(); }else if(playerAttack.supply){ return; }
         
         //Define a single enemy
         this.enemy = this.enemies[enemy];
 
         //Search through player's abilities to find the right one
-        for (let i = 0; i < this.player.actions.length; i++) {
+        /*for (let i = 0; i < this.player.actions.length; i++) {
             if (this.player.actions[i].name === playerAttack) {
                 playerAttack = this.player.actions[i];
             }
-        }
+        }*/
 
         //Randomly pick an attack out of possible attacks
         const enemyAttack = this.enemy.actions[Math.floor(Math.random() * this.enemies[enemy].actions.length)];
@@ -66,6 +68,7 @@ const combat = {
         if (this.enemy.stats.hp < 0) {
             this.enemy.stats.hp = 0;
         }
+        
         
         this.player.updateInBattle();
         this.enemy.updateInBattle();

@@ -141,7 +141,7 @@ const actionOptions = {
         _this.input.keyboard.once("keydown_ENTER", function() {
             const attack = chica.actions[parentIndex].children[index];
             const level = _this.scene.get('Level');
-            combat.newRound(level, attack);
+            combat.newRound(level, attack)
         }.bind(this));
         
         //Open Menu
