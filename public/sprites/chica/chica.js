@@ -5,15 +5,18 @@ const chica = {
     name: 'chica',
     displayName: 'Chica',
 
-    stats: {
-        hp: 20,
-        maxHp: 20,
-        tp: 20,
-        maxTp: 20,
+    get stats(){
+        return system.userData.player.stats;
     },
+    // {
+    //     hp: 20,
+    //     maxHp: 20,
+    //     tp: 20,
+    //     maxTp: 20,
+    // },
     
     get actions(){
-        return system.userData.actions;
+        return system.userData.player.actions;
     },
     
     /**

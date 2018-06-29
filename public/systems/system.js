@@ -29,47 +29,55 @@ const system = {
             this.userData = {
                 version: this.version,
                 currentLevel: "Intro",
-                actions: [{
-                    name: "Attack",
-                    children: [{
-                        name: "Tail Whap",
-                        dealsDamage: 17,
-                        reducesDamage: 0,
-                        restoresHealth: 0
-                    }, ]
-                }, {
-                    name: "Defend",
-                    children: [{
+                player: {
+                    stats:{
+                        hp: 20,
+                        maxHp: 20,
+                        tp: 20,
+                        maxTp: 20,
+                    },
+                    actions: [{
+                        name: "Attack",
+                        children: [{
+                            name: "Tail Whap",
+                            dealsDamage: 17,
+                            reducesDamage: 0,
+                            restoresHealth: 0
+                        }, ]
+                    }, {
                         name: "Defend",
-                        dealsDamage: 0,
-                        reducesDamage: 9,
-                        restoresHealth: 0,
-                    }, ]
-                }, {
-                    name: "Special",
-                    children: [{
-                        name: "Cuteness",
-                        dealsDamage: 8,
-                        reducesDamage: 0,
-                        restoresHealth: 7,
-                    }, ]
-                }, {
-                    name: "Items",
-                    children: [{
-                        name: 'Doggie Treat',
-                        dealsDamage: 0,
-                        reducesDamage: 0,
-                        restoresHealth: 15,
-                        supply: 1,
-                        useItem:function(){ this.supply-- },
-                    }]
-                }, ],
-                
+                        children: [{
+                            name: "Defend",
+                            dealsDamage: 0,
+                            reducesDamage: 9,
+                            restoresHealth: 0,
+                        }, ]
+                    }, {
+                        name: "Special",
+                        children: [{
+                            name: "Cuteness",
+                            dealsDamage: 8,
+                            reducesDamage: 0,
+                            restoresHealth: 7,
+                        }, ]
+                    }, {
+                        name: "Items",
+                        children: [{
+                            name: 'Doggie Treat',
+                            dealsDamage: 0,
+                            reducesDamage: 0,
+                            restoresHealth: 15,
+                            supply: 1,
+                            useItem: function() { this.supply-- },
+                        }]
+                    }, ],
+            
+                }
             };
         }
         
         //JSON doesn't support functions
-        this.userData.actions[3].children.forEach(child => child.useItem = function(){ child.supply-- });
+        this.userData.player.actions[3].children.forEach(child => child.useItem = function(){ child.supply-- });
         
         //Add reset button TODO remove for final build
         const button = document.createElement('BUTTON');
