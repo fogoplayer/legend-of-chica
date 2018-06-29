@@ -21,22 +21,22 @@ const actionOptions = {
         graphics.lineStyle(1, 0xffffff);
         graphics.lineBetween(gameWidth - cellWidth, gameHeight * 2 / 3, gameWidth - cellWidth, gameHeight);
         
-        const actions = chica.actions;
+        const categories = chica.actions;
         this.categoriesGroup = _this.add.group();
-        const nOfOptions = actions.length;
+        const nOfOptions = categories.length;
         
         for (let i = 0; i < nOfOptions; i++) {
             const y = gameHeight * 2 / 3 + cellHeight * i;
             const x = 0 + gameWidth - cellWidth;
 
-            let addedText = _this.add.text(x, y, ` ${ actions[i].name }`, {
+            let addedText = _this.add.text(x, y, ` ${ categories[i].name }`, {
                 fontSize: '32px',
                 fill: '#ffffff',
                 color: '#ffffff',
                 align: 'left',
                 origin: { x: 0, y: 0 }
             });
-            addedText.children = actions[i].children;
+            addedText.children = categories[i].children;
             this.categoriesGroup.add(addedText);
 
         }
@@ -75,16 +75,25 @@ const actionOptions = {
         graphics.lineStyle(1, 0xffffff);
         graphics.lineBetween(gameWidth - cellWidth, gameHeight * 2 / 3, gameWidth - cellWidth, gameHeight);
         
-        //const actions = chica.actions;
         const actions = this.categoriesGroup.children.entries[index].children;
         this.actionsGroup = _this.add.group();
-        const nOfOptions = actions.length;
+        let nOfOptions = actions.length;
         
         for (let i = 0; i < nOfOptions; i++) {
+            let itemsLeft = "";
+            if (actions[i].supply > 0 && actions[i]) {
+                itemsLeft = ` (${ actions[i].supply })`
+            }
+            else if (actions[i].supply <= 0) {
+                actions.pop(actions[i--]);
+                nOfOptions--
+                continue;
+            }
+
             const y = gameHeight * 2 / 3 + cellHeight * i;
             const x = 10 + gameWidth - cellWidth;
-
-            let addedText = _this.add.text(x, y, `${ actions[i].name }`, {
+            
+            let addedText = _this.add.text(x, y, `${ actions[i].name + itemsLeft}`, {
                 fontSize: '32px',
                 fill: '#ffffff',
                 color: '#ffffff',
@@ -92,7 +101,6 @@ const actionOptions = {
                 wordWrap: { width: 200 },
                 origin: { x: 0, y: 0 },
             });
-            addedText.children = actions[i].children;
             this.actionsGroup.add(addedText);
 
         }
@@ -124,6 +132,7 @@ const actionOptions = {
         _this.input.keyboard.removeAllListeners("keydown_UP");
         _this.input.keyboard.removeAllListeners("keydown_DOWN");
         _this.input.keyboard.removeAllListeners("keydown_LEFT");
+        _this.input.keyboard.removeAllListeners("keydown_ENTER");
         for (let i = 0; i < length; i++) {
             this.actionsGroup.children.entries[i].setBackgroundColor('#888888');
         }
@@ -159,6 +168,7 @@ const actionOptions = {
         _this.input.keyboard.removeAllListeners("keydown_UP");
         _this.input.keyboard.removeAllListeners("keydown_DOWN");
         _this.input.keyboard.removeAllListeners("keydown_LEFT");
+        _this.input.keyboard.removeAllListeners("keydown_ENTER");
         for (let i = 0; i < length; i++) {
             this.categoriesGroup.children.entries[i].setBackgroundColor('#888888');
         }

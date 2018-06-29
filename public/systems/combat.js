@@ -43,9 +43,8 @@ const combat = {
     **/
     async newRound(_this, playerAttack, enemy = 0) {
         //If not the required attack or invalid use of an item, return without running the attack
-        console.log(playerAttack.supply);
         if (this.attackLimiter && playerAttack.name !== this.attackLimiter){ return; }
-        if (playerAttack.supply > 0){ playerAttack.useItem(); }else if(playerAttack.supply <= 0){ console.log('return'); return; }
+        if (playerAttack.supply > 0){ playerAttack.useItem(); }else if(playerAttack.supply <= 0){ return; }
         
         //Define a single enemy
         this.enemy = this.enemies[enemy];
