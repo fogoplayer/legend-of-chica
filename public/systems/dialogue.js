@@ -53,7 +53,7 @@ class Dialogue extends Phaser.Scene {
         //Close on enter key
         this.input.keyboard.on('keydown_ENTER', function() {
             if (!this.sys.isSleeping()) {
-                                                                                              console.log('Index', this.dialogueIndex);
+                this.dialogIndex++;
                 clearInterval(this.interval);
                 this.sys.sleep();
                 this.loadDialogue();
@@ -95,18 +95,18 @@ class Dialogue extends Phaser.Scene {
     **/
     loadDialogue() {
         if (this.dialogIndex < this.dialogList.length) {
-                                                                    console.log(this.dialogIndex++, this.dialogList.length);
+            
             this.scene.manager.pause('Level');
             
-            let i = 1
+            let i = 0
             this.interval = setInterval(()=>{
-                if(i<this.dialogList[this.dialogIndex].text.length){
+                if(i < this.dialogList[this.dialogIndex].text.length){
                     this.text.setText(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text.substring(0,++i) }`);
                 }else{
                     clearInterval(this.interval);
                 }
                 
-            },30);
+            },20);
             
             this.sys.wake();
         }
