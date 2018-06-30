@@ -42,10 +42,6 @@ const bbb = {
         _this.bbb = _this.physics.add.sprite(x, y, 'bbb').setScale(0.25);
         _this.bbb.setOrigin(0.5,0.5);
         _this.bbb.setCollideWorldBounds(false);
-        /*chica.createAnimations(_this);
-        _this.chica.anims.play('turn');
-        
-        chica.createKeyboardControls(_this);*/
     },
     
     /**
@@ -83,7 +79,7 @@ const bbb = {
     updateInWorld(_this){
         if(_this.bbb){
             if (_this.bbb.x > _this.sceneWidth / 2 + 200) {
-                _this.bbb.setVelocityX(-160);
+                _this.bbb.setVelocityX(-320);
             }else{
                 _this.bbb.setVelocity(0, 0);
                 _this.events.emit('inPosition');
