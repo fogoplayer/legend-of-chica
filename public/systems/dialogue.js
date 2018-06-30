@@ -74,15 +74,13 @@ class Dialogue extends Phaser.Scene {
             fontSize: '32px',
             fill: '#ffffff',
             color: '#ffffff',
-            wordWrap: {
-                width: width
-            }
-        }).setOrigin(0, 0);
+            wordWrap: { width: width - 20, },
+        });
         this.add.text(width - 10, height - 10, 'ENTER', {
             fontSize: '32px',
             fill: '#ffffff',
-            color: '#ffffff'
-        }).setOrigin(1, 1);
+            color: '#ffffff',
+        }).setOrigin(1,1);
 
         //Load first line of dialogue
         this.loadDialogue();
@@ -104,7 +102,7 @@ class Dialogue extends Phaser.Scene {
             this.input.keyboard.removeAllListeners('keydown_ENTER');
             this.scene.manager.resume('Level');
             this.scene.manager.remove('Dialogue');
-            console.log('Dialogue Terminated.');
+            console.info('Dialogue terminated');
             this.resolve ? this.resolve() : null;
         }
 
