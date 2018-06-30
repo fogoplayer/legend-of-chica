@@ -42,22 +42,17 @@ const tbt = {
         _this.tbt = _this.physics.add.sprite(x, y, 'tbt').setScale(.25);
         _this.tbt.setOrigin(0.5,0.5);
         _this.tbt.setCollideWorldBounds(false);
-    },
-    
-    /**
-     * Update for Tiny Box Tim
-     * Should only be called in world levels
-     * @param _this-the current scene
-     * @return null
-    **/
-    updateInWorld(_this){
-        if(_this.tbt){
+        
+        let updateInWorld = setInterval(()=> {
             if (_this.tbt.x > _this.sceneWidth / 2 + 50) {
-                _this.tbt.setVelocityX(-160);
-            }else{
-                _this.tbt.setVelocity(0, 0);
+                _this.tbt.setVelocityX(-320);
             }
-        }
+            else {
+                _this.tbt.setVelocity(0, 0);
+                _this.events.emit('tbtInPosition');
+                clearInterval(updateInWorld);
+            }
+        })
     },
     
     /**

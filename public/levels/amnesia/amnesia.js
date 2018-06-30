@@ -67,11 +67,18 @@ export default class Amnesia extends Phaser.Scene {
         
         
         await (() => {
-            return new Promise((resolve, reject)=> {
-                bbb.createInWorld(this, this.sceneWidth + 200, this.sceneHeight / 2);
+            return new Promise((resolve, reject) => {
                 tbt.createInWorld(this, this.sceneWidth + 50, this.sceneHeight / 2);
-                
-                this.events.on('inPosition',function(){
+                this.events.once('tbtInPosition', function() {
+                    resolve();
+                });
+            });
+        })();
+        
+        await (() => {
+            return new Promise((resolve, reject) => {
+                bbb.createInWorld(this, this.sceneWidth + 50, this.sceneHeight / 2);
+                this.events.once('bbbInPosition', function() {
                     resolve();
                 });
             });
@@ -89,17 +96,5 @@ export default class Amnesia extends Phaser.Scene {
         ]);
         
         level.changeLevel('Tutorial', this);
-    }
-    
-    /**
-     * Update for Amnesia
-     * Calls bbb.updateInWorld() and tbt.updateInWorld()
-     * Chica has no updateInWorld function because (right now at least) movement is handled by her createInWorld() function
-     * @param null
-     * @return null
-    **/
-    update() {
-        bbb.updateInWorld(this);
-        tbt.updateInWorld(this);
     }
 }
