@@ -60,6 +60,7 @@ const combat = {
         const enemyAttack = this.enemy.actions[Math.floor(Math.random() * this.enemies[enemy].actions.length)];
 
         //Calculate final HP
+        if (enemyAttack.dodge) { playerAttack.dealsDamage = 0 }
         this.player.stats.hp += playerAttack.restoresHealth + playerAttack.reducesDamage - enemyAttack.dealsDamage;
         if (this.player.stats.hp < 0) {
             this.player.stats.hp = 0;
