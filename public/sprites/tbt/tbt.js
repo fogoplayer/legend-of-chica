@@ -1,4 +1,4 @@
-//JS Module for Big Box Barry
+//JS Module for Tiny Box Tim
 
 const tbt = {
 
