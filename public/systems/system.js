@@ -91,8 +91,6 @@ const system = {
             };
             document.getElementById('body').appendChild(button);
         }
-        
-        window.onbeforeunload = this.save();
     },
     
     /**
