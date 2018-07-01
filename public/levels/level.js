@@ -75,15 +75,24 @@ const level = {
         
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
         let scenes = _this.scene.manager.scenes
-        while (scenes.length > 0){
-            _this.scene.manager.remove(scenes[0].scene.key);
-        };
         system.userData.currentLevel = newLevel;
-        setTimeout(() => {
-            _this.scene.manager.add(newLevel, window[newLevel]);
-        },1);
+        _this.add.text(384, 384, 'Progress Saved', {
+            fontSize: '32px',
+            fill: '#ffffff',
+            color: '#ffffff',
+            backgroundColor: '#000000bb',
+        }).setOrigin(0.5, 0.5);
         
-        system.save();
+        setTimeout(() => {
+            while (scenes.length > 0) {
+                    _this.scene.manager.remove(scenes[0].scene.key);
+                };
+            setTimeout(() => {
+                _this.scene.manager.add(newLevel, window[newLevel]);
+            }, 5);
+        }, 1000);
+        
+        system.save(_this);
         console.clear();
     }
 };
