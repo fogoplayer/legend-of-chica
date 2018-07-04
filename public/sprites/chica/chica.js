@@ -5,7 +5,7 @@ const chica = {
     name: 'chica',
     displayName: 'Chica',
 
-    get stats(){
+    get stats() {
         return system.userData.player.stats;
     },
     // {
@@ -14,16 +14,16 @@ const chica = {
     //     tp: 20,
     //     maxTp: 20,
     // },
-    
-    get actions(){
+
+    get actions() {
         return system.userData.player.actions;
     },
-    
+
     /**
      * Preload for Chica
      * @param _this
      * @return null
-    **/
+     **/
     preload(_this) {
         _this.load.spritesheet('chica', './sprites/chica/chicaSpriteSheet.png', {
             frameWidth: 24,
@@ -31,13 +31,13 @@ const chica = {
         });
         chica.speed = _this.sys.game.config.height / 2;
     },
-    
+
     /**
      * Create for Chica
      * Should only be called in world levels
      * @param null
      * @return null
-    **/
+     **/
     createInWorld(_this, initialX, initialY) {
         _this.chica = _this.physics.add.sprite(initialX, initialY, 'chica').setScale(4);
         _this.chica.setOrigin(0.5, 0.5);
@@ -46,15 +46,15 @@ const chica = {
         /*chica.createAnimations(_this);
         _this.chica.anims.play('turn');*/
 
-        chica.createKeyboardControlsInWorld(_this);
+        //chica.createKeyboardControlsInWorld(_this);
     },
-    
+
     /**
      * Create for Chica
      * Should only be called in combat levels
      * @param _this-the current scene
      * @return null
-    **/
+     **/
     createInBattle(_this) {
         const height = _this.sys.game.config.height;
         const width = _this.sys.game.config.width;
@@ -74,101 +74,56 @@ const chica = {
             color: '#ffffff'
         });
     },
-    
+
+    updateInWorld(_this) {
+        this.createKeyboardControlsInWorld(_this);
+    },
+
     /**
      * Update for Chica
      * Should only be called in combat levels
      * @param _this-the current scene
      * @return null
-    **/
+     **/
     updateInBattle() {
         this.statsText.setText(`HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`);
     },
-    
+
     /**
      * Create keyboard controls for Chica
      * Should only be called in world levels
      * Creates up, down, left, right
      * @param _this-the current scene
      * @return null
-    **/
+     **/
     createKeyboardControlsInWorld(_this) {
-        //Up
-        _this.input.keyboard.on('keydown_UP', function() {
+        const isDown = key => _this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes[key]).isDown;
+
+        //Up/down
+        if (isDown('W') || isDown('UP')) {
             _this.chica.setVelocityY(-chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keydown_W', function() {
-            _this.chica.setVelocityY(-chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_UP', function() {
-            _this.chica.setVelocityY(0);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_W', function() {
-            _this.chica.setVelocityY(0);
-        }, _this);
-
-        //Down
-        _this.input.keyboard.on('keydown_DOWN', function() {
+        }else if (isDown('S') || isDown('DOWN')) {
             _this.chica.setVelocityY(chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keydown_S', function() {
-            _this.chica.setVelocityY(chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_DOWN', function() {
             _this.chica.setVelocityY(0);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_S', function() {
-            _this.chica.setVelocityY(0);
-        }, _this);
-
-        //Left
-        _this.input.keyboard.on('keydown_LEFT', function() {
+        }
+        
+        //Left/right
+        if (isDown('A') || isDown('LEFT')) {
             _this.chica.setVelocityX(-chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keydown_A', function() {
-            _this.chica.setVelocityX(-chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_LEFT', function() {
-            _this.chica.setVelocityX(0);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_A', function() {
-            _this.chica.setVelocityX(0);
-        }, _this);
-
-        //Right
-        _this.input.keyboard.on('keydown_RIGHT', function() {
+        }else if (isDown('D') || isDown('RIGHT')) {
             _this.chica.setVelocityX(chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keydown_D', function() {
-            _this.chica.setVelocityX(chica.speed);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_RIGHT', function() {
+        }else{
             _this.chica.setVelocityX(0);
-        }, _this);
-
-        _this.input.keyboard.on('keyup_D', function() {
-            _this.chica.setVelocityX(0);
-        }, _this);
+        }
     },
-    
+
     /**
      * Create animations for Chica
      * Creates left, right and turn
      * TODO put in real anims once we have spritesheets
      * @param _this-the current scene
      * @return null
-    **/
+     **/
     createAnimations(_this) {
 
         _this.anims.create({

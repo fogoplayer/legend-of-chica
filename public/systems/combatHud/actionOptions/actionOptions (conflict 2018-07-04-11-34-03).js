@@ -44,7 +44,12 @@ const actionOptions = {
 
         }
         
-        this.openMenu(_this,0);
+        // _this.input.keyboard.once("keydown_UP", function() {
+        //     this.openMenu(_this, 0);
+        // }.bind(this));
+        // _this.input.keyboard.once("keydown_DOWN", function() {
+        //     this.openMenu(_this, 0);
+        // }.bind(this));
     },
     
     /**
@@ -103,6 +108,7 @@ const actionOptions = {
                 origin: { x: 0, y: 0 },
             });
             this.actionsGroup.add(addedText);
+                                                                                                                console.log('Add', actions[i].name);
         }
         
         //If there are no options in a particular menu, display an error
@@ -120,6 +126,19 @@ const actionOptions = {
             });
             this.actionsGroup.add(addedText);
         }
+        //Add new listeners
+        else {
+            // _this.input.keyboard.once("keydown_LEFT", function() {
+            //     this.categoriesGroup.children.entries[index].setBackgroundColor('#656565');
+            //     this.selectInMenu(_this, 0, index);
+            // }.bind(this));
+        }
+        // _this.input.keyboard.once("keydown_UP", function() {
+        //     index > 0          ? this.openMenu(_this, index - 1) : this.openMenu(_this, length - 1);
+        // }.bind(this));
+        // _this.input.keyboard.once("keydown_DOWN", function() {
+        //     index < length - 1 ? this.openMenu(_this, index + 1) : this.openMenu(_this, 0);
+        // }.bind(this));
     },
     
     /**
@@ -143,6 +162,22 @@ const actionOptions = {
         for (let i = 0; i < length; i++) {
             this.actionsGroup.children.entries[i].setBackgroundColor('#888888');
         }
+        
+        //Add new listeners
+        _this.input.keyboard.once("keydown_UP", function() {
+            index > 0          ? this.selectInMenu(_this, index - 1, parentIndex) : this.selectInMenu(_this, length - 1, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_DOWN", function() {
+            index < length - 1 ? this.selectInMenu(_this, index + 1, parentIndex) : this.selectInMenu(_this, 0, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_RIGHT", function() {
+            this.openMenu(_this, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_ENTER", function() {
+            const attack = chica.actions[parentIndex].children[index];
+            const level = _this.scene.get('Level');
+            combat.newRound(level, attack)
+        }.bind(this));
         
         //Open Menu
         this.actionsGroup.children.entries[index].setBackgroundColor('#000000');
@@ -171,47 +206,30 @@ const actionOptions = {
         }catch(e){console.warn(e)}
     },
     
-    /**
-     * Update function for actionOptions
-     * Runs keyboard controls
-     * @param _this-the current scene
-     * @return null;
-    **/
     update(_this){
         const justDown = key => Phaser.Input.Keyboard.JustDown(_this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes[key]));
         let length;
-        if(!this.parentIndex && this.parentIndex !== 0){ length = this.categoriesGroup.getLength(); }else{ length = this.actionsGroup.getLength(); }
+        if(!this.parentIndex){ length = this.categoriesGroup.getLength(); }else{ length = this.actionsGroup.getLength(); }
         
         //Navigate up and down menus
         if(justDown('W') || justDown('UP')){
-            if(!this.parentIndex && this.parentIndex !== 0){
+            if(!this.parentIndex){
                 this.openMenu(_this, this.index > 0 ? this.index - 1 : length - 1);
-            }else{
-                this.selectInMenu(_this, this.index > 0 ? this.index - 1 : length - 1, this.parentIndex);
             }
+                                                                                               console.log(_this.children.list);
+
         }
         
         if(justDown('S') || justDown('DOWN')){
-            if(!this.parentIndex && this.parentIndex !== 0){
+            if(!this.parentIndex){
                 this.openMenu(_this, this.index < length - 1 ? this.index + 1 : 0);
-            }else{
-                this.selectInMenu(_this, this.index < length - 1 ? this.index + 1 : 0, _this);
             }
         }
         
         //Open and close menus
-        if((justDown('A') || justDown('LEFT')) && !this.parentIndex && this.parentIndex !== 0 && this.actionsGroup.children.size > 0){
+        if((justDown('A') || justDown('LEFT')) && !this.parentIndex && this.actionsGroup.children.size > 0){
+            
             this.selectInMenu(_this,0,this.index);
-        }
-        if((justDown('D') || justDown('RIGHT')) && (this.parentIndex || this.parentIndex === 0)){
-            this.openMenu(_this,this.parentIndex);
-        }
-        
-        //Attack on Enter or Space
-        if((justDown('ENTER') || justDown('SPACE')) && (this.parentIndex || this.parentIndex === 0)){
-            const attack = chica.actions[this.parentIndex].children[this.index];
-            const level = _this.scene.get('Level');
-            combat.newRound(level, attack)
         }
     }
     

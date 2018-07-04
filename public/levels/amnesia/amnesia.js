@@ -97,4 +97,8 @@ export default class Amnesia extends Phaser.Scene {
         
         level.changeLevel('Tutorial', this);
     }
+    
+    update(){
+        chica.updateInWorld(this);
+    }
 }

@@ -81,6 +81,10 @@ const combat = {
         
         this.resolve ? this.resolve() : null;
     },
+    
+    update(_this){
+        actionOptions.update(_this)
+    }
 };
 
 

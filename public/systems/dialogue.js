@@ -1,5 +1,7 @@
 //JS module for the Dialogue Scene
 
+import system from './system.js';
+
 class Dialogue extends Phaser.Scene {
     
     /**
@@ -8,7 +10,7 @@ class Dialogue extends Phaser.Scene {
      * @param color-(Optional) a way to specify a hex code for the dialogue popup.
      * @return null
     **/
-    constructor(dialogList, color = 0x009900) {
+    constructor(dialogList, color = 0x009900, resolve = function(){}) {
         super({
             key: 'Dialogue'
         });
@@ -19,6 +21,7 @@ class Dialogue extends Phaser.Scene {
         this.dialogList = dialogList;
         this.dialogIndex = 0;
         this.color = color;
+        this.resolve=resolve;
     }
     
     /**
@@ -34,8 +37,7 @@ class Dialogue extends Phaser.Scene {
     **/
     static dialogueConstructorWithPromise(scene, dialogList, color = 0x009900){
         return new Promise((resolve,reject) => {
-            let dialogue = scene.scene.manager.add('Dialogue', new Dialogue(dialogList, color));
-            dialogue.resolve = resolve;
+            let dialogue = scene.scene.manager.add('Dialogue', new Dialogue(dialogList, color, resolve));
         });
     }
     
@@ -96,7 +98,7 @@ class Dialogue extends Phaser.Scene {
     loadDialogue() {
         if (this.dialogIndex < this.dialogList.length) {
             
-            this.scene.manager.pause('Level');
+            system.pauseExceptFor('Level', this);
             
             let i = 0
             this.interval = setInterval(()=>{
@@ -112,7 +114,7 @@ class Dialogue extends Phaser.Scene {
         }
         else {
             this.input.keyboard.removeAllListeners('keydown_ENTER');
-            this.scene.manager.resume('Level');
+            system.resumeAll(this);
             this.scene.manager.remove('Dialogue');
             console.info('Dialogue terminated');
             this.resolve ? this.resolve() : null;

@@ -37,7 +37,9 @@ class Hud extends Phaser.Scene {
         chica.createInBattle(this);
     }
 
-    update() {}
+    update() {
+                combat.update(this);
+    }
 }
 
 export default Hud;

@@ -4,8 +4,6 @@ import combat from '../../combat.js';
 
 const actionOptions = {
     name:'actionOptions',
-    index:0,
-    parentIndex:undefined,
     /**
      * Constructor for ActionOptions
      * @param _this-the scene calling the function
@@ -18,12 +16,11 @@ const actionOptions = {
         const cellWidth = 200;
         const cellHeight = 48;
         
-        //Vertical Line
+        //Draw Background
         const graphics = _this.add.graphics();
         graphics.lineStyle(1, 0xffffff);
         graphics.lineBetween(gameWidth - cellWidth, gameHeight * 2 / 3, gameWidth - cellWidth, gameHeight);
         
-        //Add Text
         const categories = chica.actions;
         this.categoriesGroup = _this.add.group();
         const nOfOptions = categories.length;
@@ -44,7 +41,12 @@ const actionOptions = {
 
         }
         
-        this.openMenu(_this,0);
+        _this.input.keyboard.once("keydown_UP", function() {
+            this.openMenu(_this, 0);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_DOWN", function() {
+            this.openMenu(_this, 0);
+        }.bind(this));
     },
     
     /**
@@ -55,9 +57,6 @@ const actionOptions = {
      * @return null
     **/
     openMenu(_this, index = 0){
-        this.index = index;
-        this.parentIndex = undefined;
-        
         //A few initial variables
         const gameWidth = _this.sys.game.config.width;
         const gameHeight = _this.sys.game.config.height;
@@ -71,7 +70,7 @@ const actionOptions = {
         //Change background color of selected menu
         this.categoriesGroup.children.entries[index].setBackgroundColor('#000000');
 
-        //Vertical Line
+        //Draw Background
         const graphics = _this.add.graphics();
         graphics.lineStyle(1, 0xffffff);
         graphics.lineBetween(gameWidth - cellWidth, gameHeight * 2 / 3, gameWidth - cellWidth, gameHeight);
@@ -103,6 +102,7 @@ const actionOptions = {
                 origin: { x: 0, y: 0 },
             });
             this.actionsGroup.add(addedText);
+
         }
         
         //If there are no options in a particular menu, display an error
@@ -120,6 +120,19 @@ const actionOptions = {
             });
             this.actionsGroup.add(addedText);
         }
+        //Add new listeners
+        else {
+            _this.input.keyboard.once("keydown_LEFT", function() {
+                this.categoriesGroup.children.entries[index].setBackgroundColor('#656565');
+                this.selectInMenu(_this, 0, index);
+            }.bind(this));
+        }
+        _this.input.keyboard.once("keydown_UP", function() {
+            index > 0          ? this.openMenu(_this, index - 1) : this.openMenu(_this, length - 1);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_DOWN", function() {
+            index < length - 1 ? this.openMenu(_this, index + 1) : this.openMenu(_this, 0);
+        }.bind(this));
     },
     
     /**
@@ -130,9 +143,6 @@ const actionOptions = {
      * @return null
     **/
     selectInMenu(_this, index, parentIndex){
-        this.index = index;
-        this.parentIndex = parentIndex;
-        
         const length = this.actionsGroup.getLength();
         
         //Remove old listeners
@@ -143,6 +153,22 @@ const actionOptions = {
         for (let i = 0; i < length; i++) {
             this.actionsGroup.children.entries[i].setBackgroundColor('#888888');
         }
+        
+        //Add new listeners
+        _this.input.keyboard.once("keydown_UP", function() {
+            index > 0          ? this.selectInMenu(_this, index - 1, parentIndex) : this.selectInMenu(_this, length - 1, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_DOWN", function() {
+            index < length - 1 ? this.selectInMenu(_this, index + 1, parentIndex) : this.selectInMenu(_this, 0, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_RIGHT", function() {
+            this.openMenu(_this, parentIndex);
+        }.bind(this));
+        _this.input.keyboard.once("keydown_ENTER", function() {
+            const attack = chica.actions[parentIndex].children[index];
+            const level = _this.scene.get('Level');
+            combat.newRound(level, attack)
+        }.bind(this));
         
         //Open Menu
         this.actionsGroup.children.entries[index].setBackgroundColor('#000000');
@@ -170,50 +196,6 @@ const actionOptions = {
             }
         }catch(e){console.warn(e)}
     },
-    
-    /**
-     * Update function for actionOptions
-     * Runs keyboard controls
-     * @param _this-the current scene
-     * @return null;
-    **/
-    update(_this){
-        const justDown = key => Phaser.Input.Keyboard.JustDown(_this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes[key]));
-        let length;
-        if(!this.parentIndex && this.parentIndex !== 0){ length = this.categoriesGroup.getLength(); }else{ length = this.actionsGroup.getLength(); }
-        
-        //Navigate up and down menus
-        if(justDown('W') || justDown('UP')){
-            if(!this.parentIndex && this.parentIndex !== 0){
-                this.openMenu(_this, this.index > 0 ? this.index - 1 : length - 1);
-            }else{
-                this.selectInMenu(_this, this.index > 0 ? this.index - 1 : length - 1, this.parentIndex);
-            }
-        }
-        
-        if(justDown('S') || justDown('DOWN')){
-            if(!this.parentIndex && this.parentIndex !== 0){
-                this.openMenu(_this, this.index < length - 1 ? this.index + 1 : 0);
-            }else{
-                this.selectInMenu(_this, this.index < length - 1 ? this.index + 1 : 0, _this);
-            }
-        }
-        
-        //Open and close menus
-        if((justDown('A') || justDown('LEFT')) && !this.parentIndex && this.parentIndex !== 0 && this.actionsGroup.children.size > 0){
-            this.selectInMenu(_this,0,this.index);
-        }
-        if((justDown('D') || justDown('RIGHT')) && (this.parentIndex || this.parentIndex === 0)){
-            this.openMenu(_this,this.parentIndex);
-        }
-        
-        //Attack on Enter or Space
-        if((justDown('ENTER') || justDown('SPACE')) && (this.parentIndex || this.parentIndex === 0)){
-            const attack = chica.actions[this.parentIndex].children[this.index];
-            const level = _this.scene.get('Level');
-            combat.newRound(level, attack)
-        }
-    }
     
 };
 

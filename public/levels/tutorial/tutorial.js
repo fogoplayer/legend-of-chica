@@ -121,6 +121,7 @@ export default class Tutorial extends Phaser.Scene {
     **/
     combatAcceptsOnly(move){
         return new Promise((resolve, reject) => {
+            console.log(1)
             //Make resolve callable from combat and limit action options
             combat.resolve = resolve;
             combat.attackLimiter = move;
