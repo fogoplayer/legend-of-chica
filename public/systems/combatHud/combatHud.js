@@ -1,6 +1,6 @@
 //JS module for the Hud Scene
 import chica from '../../sprites/chica/chica.js';
-import actionOptions from './actionOptions/actionOptions.js';
+import actionOptions from './actionOptions.js';
 
 class Hud extends Phaser.Scene {
     /**
