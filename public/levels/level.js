@@ -23,7 +23,7 @@ const level = {
         if(levelType === 'battle'){
             moduleList = moduleList.concat([
                 '../systems/combatHud/combatHud.js',
-                '../systems/combatHud/actionOptions/actionOptions.js',
+                '../systems/combatHud/actionOptions.js',
                 '../systems/combat.js'
             ]);
         }

@@ -1,6 +1,6 @@
 //JS Module to display attacks during combta
-import chica from '../../../sprites/chica/chica.js';
-import combat from '../../combat.js';
+import chica from '../../sprites/chica/chica.js';
+import combat from '../combat.js';
 
 const actionOptions = {
     name:'actionOptions',
