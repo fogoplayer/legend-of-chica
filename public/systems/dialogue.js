@@ -114,7 +114,9 @@ class Dialogue extends Phaser.Scene {
         }
         else {
             this.input.keyboard.removeAllListeners('keydown_ENTER');
-            system.resumeAll(this);
+            this.input.keyboard.once('keyup_ENTER', ()=>{
+                system.resumeAll(this);
+            });
             this.scene.manager.remove('Dialogue');
             console.info('Dialogue terminated');
             this.resolve ? this.resolve() : null;
