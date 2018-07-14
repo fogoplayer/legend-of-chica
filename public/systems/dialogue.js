@@ -100,10 +100,18 @@ class Dialogue extends Phaser.Scene {
             
             system.pauseExceptFor('Level', this);
             
-            let i = 0
+            let i = 0;
+            let lastSpaceIndex;
+            const dialogText = this.dialogList[this.dialogIndex];
             this.interval = setInterval(()=>{
-                if(i < this.dialogList[this.dialogIndex].text.length){
-                    this.text.setText(`${ this.dialogList[this.dialogIndex].char }:\n${ this.dialogList[this.dialogIndex].text.substring(0,++i) }`);
+                if(i < dialogText.text.length){
+                    this.text.setText(`${ dialogText.char }:\n${ dialogText.text.substring(0,++i) }`);
+                    
+                    //Keep track of spaces
+                    if(dialogText.text.substring(i - 1,i) === " "){ lastSpaceIndex = i - 1 }
+                    
+                    //Insert line breaks dynamically
+                    if(this.text.width >= 512*1.5 - 20){ dialogText.text = dialogText.text.substring(0,lastSpaceIndex)+"\n"+dialogText.text.substring(lastSpaceIndex + 1); }
                 }else{
                     clearInterval(this.interval);
                 }
