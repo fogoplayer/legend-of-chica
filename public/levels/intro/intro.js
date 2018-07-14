@@ -5,37 +5,35 @@ import level from '../level.js';
 import chica from '../../sprites/chica/chica.js';
 
 export default class Intro extends Phaser.Scene {
-    
+
     /**
      * Constructor for Intro
      * @param null
      * @return null
-    **/
+     **/
     constructor() {
         super({
             key: 'Level'
         });
         level.initialize(this);
     }
-    
+
     /**
      * Preload for Intro
      * @param null
      * @return null
-    **/
+     **/
     preload() {
         this.load.audio('mark', './music/mark.mp3');
     }
-    
+
     /**
      * Create for Amnesia
      * @param null
      * @return null
-    **/
+     **/
     async create() {
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Narrator',
                 text: 'Hello [player name], and welcome to “The Legend of Chica: Golden Guardian”!',
             },
@@ -48,11 +46,12 @@ export default class Intro extends Phaser.Scene {
                 text: 'That being said, we hope you enjoy the game. See you in the party room!',
             },
         ]);
-        
-        this.sound.add('mark').play({ loop: true, });
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+
+        this.sound.add('mark').play({
+            loop: true,
+        });
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Mark',
                 text: '…and for all of you that just recently came on to the stream, I’d like to remind you all that this is a charity stream.',
             },
@@ -65,16 +64,13 @@ export default class Intro extends Phaser.Scene {
                 text: 'That’s right, Chica! All proceeds will be going towards the Brain and Behavior Research Foundation to help fund research to alleviate mental illness. There are links in the des-',
             },
         ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
-                char: '[MUSIC NOTE]',
-                text: '[Bridgett’s Theme]',
-            },
-        ]);
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
+            char: '[MUSIC NOTE]',
+            text: '[Bridgett’s Theme]',
+        }, ]);
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Bridgett',
                 text: '(crashes through a window) OH, MARKIMOOOOOOOO! YOUR NUMBER ONE FAN IS HERE!!!',
             },
@@ -155,7 +151,7 @@ export default class Intro extends Phaser.Scene {
                 text: 'CHICA, NOOOOOOOOO!'
             }
         ]);
-        
+
         level.changeLevel('Amnesia', this);
     }
 }

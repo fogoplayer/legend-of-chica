@@ -42,6 +42,15 @@ class Dialogue extends Phaser.Scene {
     }
     
     /**
+     * Preload Welbutrin
+     * @param null
+     * @return null
+    **/
+    preload() {
+        this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
+    }
+    
+    /**
      * Create function for Dialogue
      * @param null
      * @return null
@@ -74,17 +83,8 @@ class Dialogue extends Phaser.Scene {
         graphics.fillRect(0, height / 1.5, this.sys.game.config.width, height / 1.5);
 
         //Create text boxes
-        this.text = this.add.text(10, height / 1.5 + 10, '', {
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff',
-            wordWrap: { width: width - 20, },
-        });
-        this.add.text(width - 10, height - 10, 'ENTER', {
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff',
-        }).setOrigin(1,1);
+        this.text = this.add.bitmapText(10, height / 1.5 + 10, 'welbutrin', '', 32);
+        this.add.bitmapText(width - 10, height - 20, 'welbutrin', 'ENTER', 32).setOrigin(1,1);
 
         //Load first line of dialogue
         this.loadDialogue();
