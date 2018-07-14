@@ -69,16 +69,8 @@ const bbb = {
         const graphics = _this.add.graphics();
         _this.bbb = graphics.fillStyle(0xff0000, 1);
         graphics.fillRect(x - 100, y - 100, 200, 200);
-        _this.add.text(x, y - 104, `Big Box Barry`, {
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff'
-        }).setOrigin(0.5, 1);
-        this.statsText = _this.add.text(x, y + 104, `HP: ${ this.stats.hp }/${ this.stats.maxHp }`, {
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff'
-        }).setOrigin(0.5, 0);
+        _this.add.bitmapText(x, y - 115,'welbutrin', `Big Box Barry`, 32).setOrigin(0.5, 1);
+        this.statsText = _this.add.bitmapText(x, y + 104,'welbutrin', `HP: ${ this.stats.hp }/${ this.stats.maxHp }`, 32).setOrigin(0.5, 0);
     },
     
     /**

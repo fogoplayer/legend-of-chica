@@ -12,7 +12,7 @@ const level = {
             key: 'Level',
             active: true
         });
-        
+
         //Modules that every level uses
         let moduleList = ['../systems/dialogue.js'];
 
@@ -29,6 +29,10 @@ const level = {
         }
 
         await system.addModules(moduleList)
+    },
+
+    preload(_this) {
+        _this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
     },
 
     /**
@@ -71,9 +75,6 @@ const level = {
      * @param _this-the current scene object
      **/
     changeLevel: async(newLevel, _this) => {
-        //Load welbutrin
-        _this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
-    
         _this.sound.sounds.forEach(sound => {
             sound.destroy()
         });
@@ -81,12 +82,14 @@ const level = {
         await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
         let scenes = _this.scene.manager.scenes
         system.userData.currentLevel = newLevel;
-        _this.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32/*{
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff',
-            backgroundColor: '#000000bb',
-        }*/).setOrigin(0.5, 0.5);
+        _this.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32
+            /*{
+                        fontSize: '32px',
+                        fill: '#ffffff',
+                        color: '#ffffff',
+                        backgroundColor: '#000000bb',
+                    }*/
+        ).setOrigin(0.5, 0.5);
 
         setTimeout(() => {
             while (scenes.length > 0) {

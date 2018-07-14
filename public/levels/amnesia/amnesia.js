@@ -26,6 +26,7 @@ export default class Amnesia extends Phaser.Scene {
      * @return null
      **/
     async preload() {
+        level.preload(this);
         chica.preload(this);
         bbb.preload(this);
         tbt.preload(this);
