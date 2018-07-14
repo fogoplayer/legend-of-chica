@@ -18,6 +18,10 @@ class Hud extends Phaser.Scene {
         });
     }
     
+    preload() {
+        this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
+    }
+    
     /**
      * Create function for the HUD
      * Creates rectangle overlay, then calls actionOptions.create() and chica.createInBattle() to add them

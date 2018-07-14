@@ -58,21 +58,13 @@ const chica = {
     createInBattle(_this) {
         const height = _this.sys.game.config.height;
         const width = _this.sys.game.config.width;
-        _this.add.text(4, height * 2 / 3, `Chica`, {
-            fontSize: '64px',
-            fill: '#ffffff',
-            color: '#ffffff'
-        });
+        _this.add.bitmapText(4, height * 2 / 3, 'welbutrin', `Chica`, 64);
         _this.add.text(4, height * 2 / 3 + 64 + 4, `ICON`, {
             fontSize: '96px',
             fill: '#ffffff',
             color: '#ffffff'
         });
-        this.statsText = _this.add.text(4, height * 2 / 3 + 64 + 4 + 96 + 4, `HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`, {
-            fontSize: '32px',
-            fill: '#ffffff',
-            color: '#ffffff'
-        });
+        this.statsText = _this.add.bitmapText(4, height * 2 / 3 + 64 + 4 + 96 + 4, 'welbutrin', `HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`, 32);
     },
 
     updateInWorld(_this) {

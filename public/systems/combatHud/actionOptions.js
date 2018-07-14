@@ -32,13 +32,8 @@ const actionOptions = {
             const y = gameHeight * 2 / 3 + cellHeight * i;
             const x = 0 + gameWidth - cellWidth;
 
-            let addedText = _this.add.text(x, y, ` ${ categories[i].name }`, {
-                fontSize: '32px',
-                fill: '#ffffff',
-                color: '#ffffff',
-                align: 'left',
-                origin: { x: 0, y: 0 }
-            });
+            let addedText = _this.add.bitmapText(x, y, 'welbutrin', ` ${ categories[i].name }`, 32);
+            addedText.setAlpha(0.5);
             addedText.children = categories[i].children;
             this.categoriesGroup.add(addedText);
 
@@ -68,8 +63,9 @@ const actionOptions = {
         //Remove old listeners & reset
         this.closeMenus(_this);
         
-        //Change background color of selected menu
-        this.categoriesGroup.children.entries[index].setBackgroundColor('#000000');
+        //Change alpha of selected menu
+        this.categoriesGroup.children.entries[index].setAlpha(1);
+        // this.categoriesGroup.children.entries[index].setBackgroundColor('#000000');
 
         //Vertical Line
         const graphics = _this.add.graphics();
@@ -94,14 +90,8 @@ const actionOptions = {
             const y = gameHeight * 2 / 3 + cellHeight * i;
             const x = 10 + gameWidth - cellWidth;
             
-            let addedText = _this.add.text(x, y, `${ actions[i].name + itemsLeft}`, {
-                fontSize: '32px',
-                fill: '#ffffff',
-                color: '#ffffff',
-                align: 'left',
-                wordWrap: { width: 200 },
-                origin: { x: 0, y: 0 },
-            });
+            let addedText = _this.add.bitmapText(x, y, 'welbutrin', `${ actions[i].name + itemsLeft}`, 32);
+            addedText.setAlpha(0.5);
             this.actionsGroup.add(addedText);
         }
         
@@ -110,14 +100,7 @@ const actionOptions = {
             const y = gameHeight * 2 / 3;
             const x = 10 + gameWidth - cellWidth;
             
-            let addedText = _this.add.text(x, y, 'Nothing to see here!', {
-                fontSize: '32px',
-                fill: '#ffffff',
-                color: '#ffffff',
-                align: 'left',
-                wordWrap: { width: 200 },
-                origin: { x: 0, y: 0 },
-            });
+            let addedText = _this.add.bitmapText(x, y, 'welbutrin', 'Nothing to see here!', 32);
             this.actionsGroup.add(addedText);
         }
     },
@@ -141,11 +124,16 @@ const actionOptions = {
         _this.input.keyboard.removeAllListeners("keydown_LEFT");
         _this.input.keyboard.removeAllListeners("keydown_ENTER");
         for (let i = 0; i < length; i++) {
-            this.actionsGroup.children.entries[i].setBackgroundColor('#888888');
+            this.actionsGroup.children.entries[i].setAlpha(0.5);
+            // this.actionsGroup.children.entries[i].setBackgroundColor('#888888');
         }
         
         //Open Menu
-        this.actionsGroup.children.entries[index].setBackgroundColor('#000000');
+        this.actionsGroup.children.entries[index].setAlpha(1);
+        // this.actionsGroup.children.entries[index].setBackgroundColor('#000000');
+        
+        //Change alpha of category
+        this.categoriesGroup.children.entries[parentIndex].setAlpha(0.75);
     },
     
     /**
@@ -161,7 +149,8 @@ const actionOptions = {
         _this.input.keyboard.removeAllListeners("keydown_LEFT");
         _this.input.keyboard.removeAllListeners("keydown_ENTER");
         for (let i = 0; i < length; i++) {
-            this.categoriesGroup.children.entries[i].setBackgroundColor('#888888');
+            this.categoriesGroup.children.entries[i].setAlpha(0.5);
+            // this.categoriesGroup.children.entries[i].setBackgroundColor('#888888');
         }
     
         try {
