@@ -5,15 +5,13 @@ const chica = {
     name: 'chica',
     displayName: 'Chica',
 
+    /**
+     * Getters for Chica
+     * Using system.userData allows player stats and abilities to persist across gameplay sessions
+     **/
     get stats() {
         return system.userData.player.stats;
     },
-    // {
-    //     hp: 20,
-    //     maxHp: 20,
-    //     tp: 20,
-    //     maxTp: 20,
-    // },
 
     get actions() {
         return system.userData.player.actions;
@@ -21,15 +19,15 @@ const chica = {
 
     /**
      * Preload for Chica
-     * @param _this
+     * @param scene-the current scene
      * @return null
      **/
-    preload(_this) {
-        _this.load.spritesheet('chica', './assets/images/chicaSpriteSheet.png', {
+    preload(scene) {
+        scene.load.spritesheet('chica', './assets/images/chicaSpriteSheet.png', {
             frameWidth: 24,
             frameHeight: 32
         });
-        chica.speed = _this.sys.game.config.height / 2;
+        chica.speed = scene.sys.game.config.height / 2;
     },
 
     /**
@@ -38,43 +36,41 @@ const chica = {
      * @param null
      * @return null
      **/
-    createInWorld(_this, initialX, initialY) {
-        _this.chica = _this.physics.add.sprite(initialX, initialY, 'chica').setScale(4);
-        _this.chica.setOrigin(0.5, 0.5);
-        _this.chica.setCollideWorldBounds(true);
+    createInWorld(scene, initialX, initialY) {
+        scene.chica = scene.physics.add.sprite(initialX, initialY, 'chica').setScale(4);
+        scene.chica.setOrigin(0.5, 0.5);
+        scene.chica.setCollideWorldBounds(true);
 
-        /*chica.createAnimations(_this);
-        _this.chica.anims.play('turn');*/
-
-        //chica.createKeyboardControlsInWorld(_this);
+        /*chica.createAnimations(scene);
+        scene.chica.anims.play('turn');*/
     },
 
     /**
      * Create for Chica
      * Should only be called in combat levels
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
      **/
-    createInBattle(_this) {
-        const height = _this.sys.game.config.height;
-        const width = _this.sys.game.config.width;
-        _this.add.bitmapText(4, height * 2 / 3, 'welbutrin', `Chica`, 64);
-        _this.add.text(4, height * 2 / 3 + 64 + 4, `ICON`, {
+    createInBattle(scene) {
+        const height = scene.sys.game.config.height;
+        const width = scene.sys.game.config.width;
+        scene.add.bitmapText(4, height * 2 / 3, 'welbutrin', `Chica`, 64);
+        scene.add.text(4, height * 2 / 3 + 64 + 4, `ICON`, {
             fontSize: '96px',
             fill: '#ffffff',
             color: '#ffffff'
         });
-        this.statsText = _this.add.bitmapText(4, height * 2 / 3 + 64 + 4 + 96 + 4, 'welbutrin', `HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`, 32);
+        this.statsText = scene.add.bitmapText(4, height * 2 / 3 + 64 + 4 + 96 + 4, 'welbutrin', `HP: ${ this.stats.hp }/${ this.stats.maxHp }\nTP: ${ this.stats.tp }/${ this.stats.maxTp }`, 32);
     },
 
-    updateInWorld(_this) {
-        this.createKeyboardControlsInWorld(_this);
+    updateInWorld(scene) {
+        this.createKeyboardControlsInWorld(scene);
     },
 
     /**
      * Update for Chica
      * Should only be called in combat levels
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
      **/
     updateInBattle() {
@@ -85,27 +81,32 @@ const chica = {
      * Create keyboard controls for Chica
      * Should only be called in world levels
      * Creates up, down, left, right
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
      **/
-    createKeyboardControlsInWorld(_this) {
-        const isDown = key => _this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes[key]).isDown;
+    createKeyboardControlsInWorld(scene) {
+        const isDown = key => scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes[key]).isDown;
 
         //Up/down
         if (isDown('W') || isDown('UP')) {
-            _this.chica.setVelocityY(-chica.speed);
-        }else if (isDown('S') || isDown('DOWN')) {
-            _this.chica.setVelocityY(chica.speed);
-            _this.chica.setVelocityY(0);
+            scene.chica.setVelocityY(-chica.speed);
         }
-        
+        else if (isDown('S') || isDown('DOWN')) {
+            scene.chica.setVelocityY(chica.speed);
+        }
+        else {
+            scene.chica.setVelocityY(0);
+        }
+
         //Left/right
         if (isDown('A') || isDown('LEFT')) {
-            _this.chica.setVelocityX(-chica.speed);
-        }else if (isDown('D') || isDown('RIGHT')) {
-            _this.chica.setVelocityX(chica.speed);
-        }else{
-            _this.chica.setVelocityX(0);
+            scene.chica.setVelocityX(-chica.speed);
+        }
+        else if (isDown('D') || isDown('RIGHT')) {
+            scene.chica.setVelocityX(chica.speed);
+        }
+        else {
+            scene.chica.setVelocityX(0);
         }
     },
 
@@ -113,14 +114,14 @@ const chica = {
      * Create animations for Chica
      * Creates left, right and turn
      * TODO put in real anims once we have spritesheets
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
      **/
-    createAnimations(_this) {
+    createAnimations(scene) {
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'left',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
@@ -128,7 +129,7 @@ const chica = {
             repeat: -1
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'turn',
             frames: [{
                 key: 'chica',
@@ -137,9 +138,9 @@ const chica = {
             frameRate: 20
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'right',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
