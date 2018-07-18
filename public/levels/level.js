@@ -7,8 +7,8 @@ const level = {
      * @param levelType-The type of level (world/battle)
      * @param chars-an array of characters to import for the level
      **/
-    initialize: async(_this, levelType = undefined) => {
-        Phaser.Scene.call(_this, {
+    initialize: async(scene, levelType = undefined) => {
+        Phaser.Scene.call(scene, {
             key: 'Level',
             active: true
         });
@@ -28,11 +28,11 @@ const level = {
             ]);
         }
 
-        await system.addModules(moduleList)
+        await system.addModules(moduleList);
     },
 
-    preload(_this) {
-        _this.load.bitmapFont('welbutrin', './assets/fonts/font.png', 'assets/fonts/font.fnt');
+    preload(scene) {
+        scene.load.bitmapFont('welbutrin', './assets/fonts/font.png', 'assets/fonts/font.fnt');
     },
 
     /**
@@ -74,14 +74,14 @@ const level = {
      * @param newLevel-the key of the level to be added
      * @param _this-the current scene object
      **/
-    changeLevel: async(newLevel, _this) => {
-        _this.sound.sounds.forEach(sound => {
+    changeLevel: async(newLevel, scene) => {
+        scene.sound.sounds.forEach(sound => {
             sound.destroy()
         });
 
         await system.addModules([`../levels/${ newLevel.toLowerCase() }.js`])
         system.userData.currentLevel = newLevel;
-        _this.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32
+        scene.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32
             /*{
                         fontSize: '32px',
                         fill: '#ffffff',
@@ -90,20 +90,20 @@ const level = {
                     }*/
         ).setOrigin(0.5, 0.5);
 
-        let scenes = _this.scene.manager.scenes;
+        let scenes = scene.scene.manager.scenes;
         setTimeout(() => {
             while (scenes.length > 0) {
-                _this.scene.manager.remove(scenes[0].scene.key);
+                scene.scene.manager.remove(scenes[0].scene.key);
             };
             setTimeout(() => {
-                _this.scene.manager.add(newLevel, window[newLevel]);
+                scene.scene.manager.add(newLevel, window[newLevel]);
             }, 5);
         }, 10000);
-        system.pauseExceptFor(null,_this);
+        system.pauseExceptFor(null, scene);
 
-        system.save(_this);
+        system.save(scene);
         console.clear();
-        console.log(_this);
+        console.log(scene);
     }
 };
 
