@@ -90,10 +90,9 @@ export default class Amnesia extends Phaser.Scene {
         })();
 
         await Dialogue.dialogueConstructorWithPromise(this, [{
-                char: 'Chica',
-                text: 'Tiny Box Tim? You’re Mark’s little biscuit! I’ll save you!!!'
-            },
-        ]);
+            char: 'Chica',
+            text: 'Tiny Box Tim? You’re Mark’s little biscuit! I’ll save you!!!'
+        }, ]);
 
         level.changeLevel('Tutorial', this);
     }

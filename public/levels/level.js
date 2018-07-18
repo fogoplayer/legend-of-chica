@@ -98,11 +98,12 @@ const level = {
             setTimeout(() => {
                 _this.scene.manager.add(newLevel, window[newLevel]);
             }, 5);
-        }, 1000);
+        }, 10000);
         system.pauseExceptFor(null,_this);
 
         system.save(_this);
         console.clear();
+        console.log(_this);
     }
 };
 
