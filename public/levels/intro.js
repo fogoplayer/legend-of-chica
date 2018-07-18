@@ -25,7 +25,7 @@ export default class Intro extends Phaser.Scene {
      **/
     preload() {
         level.preload(this);
-        this.load.audio('mark', './music/mark.mp3');
+        this.load.audio('mark', './assets/music/mark.mp3');
     }
 
     /**

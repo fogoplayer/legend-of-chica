@@ -27,7 +27,7 @@ const bbb = {
      * @return null
     **/
     preload(_this) {
-        _this.load.image('bbb', './assets/images/bbb/bbb.png');
+        _this.load.image('bbb', './assets/images/bbb.png');
     },
 
     /**
