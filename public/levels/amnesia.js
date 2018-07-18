@@ -30,7 +30,7 @@ export default class Amnesia extends Phaser.Scene {
         chica.preload(this);
         bbb.preload(this);
         tbt.preload(this);
-        this.load.image('map', './levels/amnesia/amnesia.png');
+        this.load.image('map', './assets/images/amnesia.png');
     }
 
     /**

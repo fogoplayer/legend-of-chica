@@ -34,7 +34,7 @@ export default class Tutorial extends Phaser.Scene {
         level.preload(this);
         chica.preload(this);
         bbb.preload(this);
-        this.load.image('map', './levels/amnesia/amnesia.png');
+        this.load.image('map', './assets/images/amnesia.png');
     }
     
     /**
