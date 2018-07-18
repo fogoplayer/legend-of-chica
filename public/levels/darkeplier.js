@@ -5,34 +5,34 @@ import level from './level.js';
 import chica from '../sprites/chica.js';
 
 export default class Darkeplier extends Phaser.Scene {
-    
+
     /**
      * Constructor for Intro
      * @param null
      * @return null
-    **/
+     **/
     constructor() {
         super({
             key: 'Level'
         });
         level.initialize(this);
     }
-    
+
     /**
      * Preload for Intro
      * @param null
      * @return null
-    **/
+     **/
     preload() {
         level.preload(this);
         this.load.audio('mark', './music/mark.mp3');
     }
-    
+
     /**
      * Create for Amnesia
      * @param null
      * @return null
-    **/
+     **/
     async create() {
         await Dialogue.dialogueConstructorWithPromise(this, [{
             char: 'Chica',
@@ -140,7 +140,7 @@ export default class Darkeplier extends Phaser.Scene {
             char: '',
             text: '[Player plays game]'
         }]);
-        
+
         level.changeLevel('Intro', this);
     }
 }
