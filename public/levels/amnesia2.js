@@ -25,7 +25,6 @@ export default class Amnesia2 extends Phaser.Scene {
     **/
     preload() {
         level.preload(this);
-        this.load.audio('mark', './music/mark.mp3');
     }
     
     /**

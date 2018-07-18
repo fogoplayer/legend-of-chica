@@ -19,7 +19,7 @@ class Hud extends Phaser.Scene {
     }
     
     preload() {
-        this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
+        this.load.bitmapFont('welbutrin', './assets/fonts/font.png', 'assets/fonts/font.fnt');
     }
     
     /**
