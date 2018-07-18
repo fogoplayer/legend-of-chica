@@ -1,5 +1,5 @@
 //JS Module for Chica
-import system from '../../systems/system.js';
+import system from '../systems/system.js';
 const chica = {
 
     name: 'chica',
