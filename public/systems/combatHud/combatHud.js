@@ -7,7 +7,7 @@ class Hud extends Phaser.Scene {
      * Constructor for the HUD
      * @param null
      * @return null
-    **/
+     **/
     constructor() {
         super({
             key: 'Hud'
@@ -17,17 +17,17 @@ class Hud extends Phaser.Scene {
             active: true
         });
     }
-    
+
     preload() {
         this.load.bitmapFont('welbutrin', './assets/fonts/font.png', 'assets/fonts/font.fnt');
     }
-    
+
     /**
      * Create function for the HUD
      * Creates rectangle overlay, then calls actionOptions.create() and chica.createInBattle() to add them
      * @param null
      * @return null
-    **/
+     **/
     create() {
         //Create graphics
         const height = this.sys.game.config.height;
@@ -42,7 +42,7 @@ class Hud extends Phaser.Scene {
     }
 
     update() {
-                combat.update(this);
+        combat.update(this);
     }
 }
 
