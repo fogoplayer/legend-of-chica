@@ -98,7 +98,7 @@ const level = {
             setTimeout(() => {
                 scene.scene.manager.add(newLevel, window[newLevel]);
             }, 5);
-        }, 10000);
+        }, 1000);
         system.pauseExceptFor(null, scene);
 
         system.save(scene);
