@@ -11,7 +11,7 @@ const system = {
      * @return null
      **/
     initialize() {
-        this.version = '1.1';
+        this.version = '1.2';
 
         if (!window.localStorage) {
             alert('Please update to a modern browser, such as the most recent builds of Chrome, Firefox, Safari, or Edge');
@@ -28,7 +28,7 @@ const system = {
             console.log('Creating new userData');
             this.userData = {
                 version: this.version,
-                currentLevel: "Intro",
+                currentLevel: "Tutorial",
                 player: {
                     stats: {
                         hp: 20,

@@ -80,7 +80,6 @@ const level = {
         });
 
         await system.addModules([`../levels/${ newLevel.toLowerCase() }.js`])
-        let scenes = _this.scene.manager.scenes
         system.userData.currentLevel = newLevel;
         _this.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32
             /*{
@@ -91,6 +90,7 @@ const level = {
                     }*/
         ).setOrigin(0.5, 0.5);
 
+        let scenes = _this.scene.manager.scenes;
         setTimeout(() => {
             while (scenes.length > 0) {
                 _this.scene.manager.remove(scenes[0].scene.key);
@@ -99,6 +99,7 @@ const level = {
                 _this.scene.manager.add(newLevel, window[newLevel]);
             }, 5);
         }, 1000);
+        system.pauseExceptFor(null,_this);
 
         system.save(_this);
         console.clear();
