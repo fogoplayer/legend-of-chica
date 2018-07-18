@@ -1,10 +1,10 @@
 //JS module for the amnesia Scene
 
-import level from '../level.js';
+import level from './level.js';
 
-import chica from '../../sprites/chica/chica.js';
-import bbb from '../../sprites/bbb/bbb.js';
-import tbt from '../../sprites/tbt/tbt.js';
+import chica from '../sprites/chica.js';
+import bbb from '../sprites/bbb.js';
+import tbt from '../sprites/tbt.js';
 
 export default class Amnesia extends Phaser.Scene {
 

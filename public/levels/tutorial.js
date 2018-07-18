@@ -1,8 +1,8 @@
 //JS module for the tutorial Scene
 
-import level from '../level.js';
-import chica from '../../sprites/chica/chica.js';
-import bbb from '../../sprites/bbb/bbb.js';
+import level from './level.js';
+import chica from '../sprites/chica.js';
+import bbb from '../sprites/bbb.js';
 
 // import Hud from '../../systems/combatHud/combatHud.js';
 // import actionOptions from '../../systems/combatHud/actionOptions/actionOptions.js';

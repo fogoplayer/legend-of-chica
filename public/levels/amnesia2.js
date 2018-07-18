@@ -1,8 +1,8 @@
 //JS module for the Intro Scene
 
-import level from '../level.js';
+import level from './level.js';
 
-import chica from '../../sprites/chica/chica.js';
+import chica from '../sprites/chica.js';
 
 export default class Amnesia2 extends Phaser.Scene {
     
