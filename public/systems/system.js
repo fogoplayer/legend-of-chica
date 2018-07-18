@@ -1,5 +1,5 @@
 //JS module for rememembering user data between sessions/levels
-import chica from '../sprites/chica/chica.js';
+import chica from '../sprites/chica.js';
 
 const system = {
 
