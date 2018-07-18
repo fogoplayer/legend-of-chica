@@ -36,7 +36,6 @@ export default class Amnesia2 extends Phaser.Scene {
         await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: '',
                 text: '[TBT\'s theme]'
-
             }, {
                 char: 'TBT',
                 text: 'Wow, thanks, Chica! For a dog that doesn’t know how to fight, that was pretty good!'
