@@ -48,9 +48,7 @@ export default class Intro extends Phaser.Scene {
             },
         ]);
 
-        this.sound.add('mark').play({
-            loop: true,
-        });
+        this.sound.add('mark').play({ loop: true, });
 
         await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Mark',
