@@ -12,44 +12,43 @@ import bbb from '../sprites/bbb.js';
 // import Intro from '../intro/intro.js';
 
 export default class Tutorial extends Phaser.Scene {
-    
+
     /**
      * Constructor for Tutorial
      * @param null
      * @return null
-    **/
+     **/
     constructor() {
         super({
             key: 'Level'
         });
         level.initialize(this, 'battle');
     }
-    
+
     /**
      * Preload for Tutorial
      * @param null
      * @return null
-    **/
+     **/
     preload() {
         level.preload(this);
         chica.preload(this);
         bbb.preload(this);
         this.load.image('map', './assets/images/amnesia.png');
     }
-    
+
     /**
      * Create for Tutorial
      * Calls chica.createInBattle() and combat.createCombat(), which creates the enemy
      * @param null
      * @return null
-    **/
+     **/
     async create() {
-        let map = this.add.image(0,0,'map').setOrigin(0,0).setScale(2.4);
-        
+        let map = this.add.image(0, 0, 'map').setOrigin(0, 0).setScale(2.4);
+
         this.scene.add('Hud', Hud);
         combat.createCombat(this, chica, bbb);
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Tiny Box Tim',
                 text: 'Chica? Do you even know how to fight?'
             },
@@ -66,11 +65,10 @@ export default class Tutorial extends Phaser.Scene {
                 text: 'AHHH! Quick, defend!'
             },
         ]);
-        
+
         await this.combatAcceptsOnly('Defend');
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Tiny Box Tim',
                 text: 'That was too close!'
             },
@@ -79,11 +77,10 @@ export default class Tutorial extends Phaser.Scene {
                 text: 'Alright, now you need to counter. A TAIL\nWHAP should do the trick!'
             },
         ]);
-        
+
         await this.combatAcceptsOnly('Tail Whap');
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Chica',
                 text: 'Ow, ow, OW!'
             },
@@ -92,11 +89,10 @@ export default class Tutorial extends Phaser.Scene {
                 text: 'Oh, no, Chica! Here, use this doggie treat.'
             },
         ]);
-        
+
         await this.combatAcceptsOnly('Doggie Treat');
-        
-        await Dialogue.dialogueConstructorWithPromise(this, [
-            {
+
+        await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Tiny Box Tim',
                 text: 'Ack! Chica, this calls for desperate measures.'
             },
@@ -109,27 +105,26 @@ export default class Tutorial extends Phaser.Scene {
                 text: 'RAAAAAWGH!!!'
             },
         ]);
-        
+
         await this.combatAcceptsOnly('Cuteness');
-        
+
         level.changeLevel('Amnesia2', this);
     }
-    
+
     /**
      * This function allows tutorial mode to only accept specific moves
      * @param attack-The required move
      * @return Promise
-    **/
-    combatAcceptsOnly(move){
+     **/
+    combatAcceptsOnly(move) {
         return new Promise((resolve, reject) => {
-            console.log(1)
             //Make resolve callable from combat and limit action options
             combat.resolve = resolve;
             combat.attackLimiter = move;
             //Automatically open menu
             chica.actions.forEach((menu, menuIndex) => {
-                const actionIndex = menu.children.findIndex((action)=> action.name === move);
-                if (actionIndex >= 0){
+                const actionIndex = menu.children.findIndex((action) => action.name === move);
+                if (actionIndex >= 0) {
                     actionOptions.openMenu(this.scene.manager.getScene('Hud'), menuIndex);
                     actionOptions.selectInMenu(this.scene.manager.getScene('Hud'), actionIndex, menuIndex);
                 }
