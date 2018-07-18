@@ -27,7 +27,7 @@ const tbt = {
      * @return null
     **/
     preload(_this) {
-        _this.load.image('tbt', './sprites/tbt/tbt.png');
+        _this.load.image('tbt', './assets/images/tbt/tbt.png');
     },
     
     /**

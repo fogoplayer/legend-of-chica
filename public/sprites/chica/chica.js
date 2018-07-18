@@ -25,7 +25,7 @@ const chica = {
      * @return null
      **/
     preload(_this) {
-        _this.load.spritesheet('chica', './sprites/chica/chicaSpriteSheet.png', {
+        _this.load.spritesheet('chica', './assets/images/chicaSpriteSheet.png', {
             frameWidth: 24,
             frameHeight: 32
         });
