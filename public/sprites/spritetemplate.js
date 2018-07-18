@@ -1,6 +1,6 @@
 //JS Module for
 
-const tbt = {
+const spriteName = {
 
     name: '',
     displayName: '',
@@ -23,38 +23,38 @@ const tbt = {
     
     /**
      * Preload for
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
     **/
-    preload(_this) {
-        //_this.load.image('tbt', './sprites/tbt/tbt.png');
+    preload(scene) {
+        //scene.load.image('spriteName', './assets/images/spriteName.png');
     },
     
     /**
      * Create for
      * Should only be called in world levels
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @param x-the inital x coordinate of the player
      * @param y-the initial y coordinate of the player
      * @return null
     **/
-    createInWorld(_this, x, y) {
-        _this. = _this.physics.add.sprite(x, y, 'tbt').setScale(.25);
-        _this..setOrigin(0.5,0.5);
-        _this..setCollideWorldBounds(false);
+    createInWorld(scene, x, y) {
+        scene = scene.physics.add.sprite(x, y, 'spriteName').setScale(.25);
+        scene.setOrigin(0.5,0.5);
+        scene.setCollideWorldBounds(false);
     },
     
     /**
      * Create animations for
      * Waiting for spritesheet
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
     **/
-    createAnimations(_this) {
+    createAnimations(scene) {
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'die',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('spriteName', {
                 start: 9,
                 end: 16
             }),
@@ -62,18 +62,18 @@ const tbt = {
             repeat: -1
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'turn',
             frames: [{
-                key: 'chica',
+                key: 'spriteName',
                 frame: 0
             }],
             frameRate: 20
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'right',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('spriteName', {
                 start: 9,
                 end: 16
             }),
@@ -84,4 +84,4 @@ const tbt = {
     }
 };
 
-export default tbt;
+export default spriteName;
