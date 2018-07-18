@@ -47,7 +47,7 @@ class Dialogue extends Phaser.Scene {
      * @return null
     **/
     preload() {
-        this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
+        this.load.bitmapFont('welbutrin', './assets/fonts/font.png', './assets/fonts/font.fnt');
     }
     
     /**

@@ -32,7 +32,7 @@ const level = {
     },
 
     preload(_this) {
-        _this.load.bitmapFont('welbutrin', './assets/font.png', 'assets/font.fnt');
+        _this.load.bitmapFont('welbutrin', './assets/fonts/font.png', 'assets/fonts/font.fnt');
     },
 
     /**
