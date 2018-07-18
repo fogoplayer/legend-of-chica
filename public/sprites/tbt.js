@@ -10,62 +10,58 @@ const tbt = {
         maxHp: 20,
     },
 
-    actions: [
+    actions: [{
+        name: "Crush",
+        dealsDamage: 10,
+        reducesDamage: 0,
+        restoresHealth: 0
+    }],
 
-        {
-            name: "Crush",
-            dealsDamage: 10,
-            reducesDamage: 0,
-            restoresHealth: 0
-        },
-
-    ],
-    
     /**
      * Preload for Tiny Box Tim
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
-    **/
-    preload(_this) {
-        _this.load.image('tbt', './assets/images/tbt.png');
+     **/
+    preload(scene) {
+        scene.load.image('tbt', './assets/images/tbt.png');
     },
-    
+
     /**
      * Create for Tiny Box Tim
      * Should only be called in world levels
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @param x-the inital x coordinate of the player
      * @param y-the initial y coordinate of the player
      * @return null
-    **/
-    createInWorld(_this, x, y) {
-        _this.tbt = _this.physics.add.sprite(x, y, 'tbt').setScale(.25);
-        _this.tbt.setOrigin(0.5,0.5);
-        _this.tbt.setCollideWorldBounds(false);
-        
-        let updateInWorld = setInterval(()=> {
-            if (_this.tbt.x > _this.sceneWidth / 2 + 50) {
-                _this.tbt.setVelocityX(-320);
+     **/
+    createInWorld(scene, x, y) {
+        scene.tbt = scene.physics.add.sprite(x, y, 'tbt').setScale(.25);
+        scene.tbt.setOrigin(0.5, 0.5);
+        scene.tbt.setCollideWorldBounds(false);
+
+        let updateInWorld = setInterval(() => {
+            if (scene.tbt.x > scene.sceneWidth / 2 + 50) {
+                scene.tbt.setVelocityX(-320);
             }
             else {
-                _this.tbt.setVelocity(0, 0);
-                _this.events.emit('tbtInPosition');
+                scene.tbt.setVelocity(0, 0);
+                scene.events.emit('tbtInPosition');
                 clearInterval(updateInWorld);
             }
         })
     },
-    
+
     /**
      * Create animations for Tiny Box Tim
      * Waiting for spritesheet
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
-    **/
-    createAnimations(_this) {
+     **/
+    createAnimations(scene) {
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'die',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
@@ -73,7 +69,7 @@ const tbt = {
             repeat: -1
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'turn',
             frames: [{
                 key: 'chica',
@@ -82,9 +78,9 @@ const tbt = {
             frameRate: 20
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'right',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
