@@ -10,8 +10,7 @@ const lightDemon = {
         maxHp: 15,
     },
 
-    actions: [
-        {
+    actions: [{
             name: 'Attack',
             dealsDamage: 6,
             reducesDamage: 0,
@@ -19,59 +18,59 @@ const lightDemon = {
         },
         {
             name: 'Threatening wobble',
-            dealsDamage: /*TODO how much?*/6,
+            dealsDamage: /*TODO how much?*/ 6,
             reducesDamage: 0,
             restoresHealth: 0
         },
         {
             name: 'Evasive Shimmy',
-            dealsDamage: /*TODO how much?*/6,
+            dealsDamage: /*TODO how much?*/ 6,
             reducesDamage: 0,
             restoresHealth: 0,
-            dodge:true,
+            dodge: true,
         },
         {
             name: 'Blinding Samba',
-            dealsDamage: /*TODO how much?*/6,
+            dealsDamage: /*TODO how much?*/ 6,
             reducesDamage: 0,
             restoresHealth: 0
         },
     ],
-    
+
     /**
      * Preload for Light Demon
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
-    **/
-    preload(_this) {
-        //_this.load.image('tbt', './sprites/tbt/tbt.png');
+     **/
+    preload(scene) {
+        //scene.load.image('tbt', './sprites/tbt/tbt.png');
     },
-    
+
     /**
      * Create for Light Demon
      * Should only be called in world levels
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @param x-the inital x coordinate of the player
      * @param y-the initial y coordinate of the player
      * @return null
-    **/
-    createInWorld(_this, x, y) {
-        _this.lightDemon = _this.physics.add.sprite(x, y, 'tbt').setScale(.25);
-        _this.lightDemon.setOrigin(0.5,0.5);
-        _this.lightDemon.setCollideWorldBounds(false);
+     **/
+    createInWorld(scene, x, y) {
+        scene.lightDemon = scene.physics.add.sprite(x, y, 'tbt').setScale(.25);
+        scene.lightDemon.setOrigin(0.5, 0.5);
+        scene.lightDemon.setCollideWorldBounds(false);
     },
-    
+
     /**
      * Create animations for Light Demon
      * Waiting for spritesheet
-     * @param _this-the current scene
+     * @param scene-the current scene
      * @return null
-    **/
-    createAnimations(_this) {
+     **/
+    createAnimations(scene) {
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'die',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
@@ -79,7 +78,7 @@ const lightDemon = {
             repeat: -1
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'turn',
             frames: [{
                 key: 'chica',
@@ -88,9 +87,9 @@ const lightDemon = {
             frameRate: 20
         });
 
-        _this.anims.create({
+        scene.anims.create({
             key: 'right',
-            frames: _this.anims.generateFrameNumbers('chica', {
+            frames: scene.anims.generateFrameNumbers('chica', {
                 start: 9,
                 end: 16
             }),
@@ -101,4 +100,4 @@ const lightDemon = {
     }
 };
 
-export default tbt;
+export default lightDemon;
