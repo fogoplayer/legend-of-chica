@@ -6,7 +6,7 @@
         <script type="module">
             import system from './systems/system.js';
             system.initialize();
-            const level = system.addModules([`../levels/${ system.userData.currentLevel.toLowerCase() }/${ system.userData.currentLevel.toLowerCase() }.js`])
+            const level = system.addModules([`../levels/${ system.userData.currentLevel.toLowerCase() }.js`])
             
             level.then(startGame);
             

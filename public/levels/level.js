@@ -79,7 +79,7 @@ const level = {
             sound.destroy()
         });
 
-        await system.addModules([`../levels/${ newLevel.toLowerCase() }/${ newLevel.toLowerCase() }.js`])
+        await system.addModules([`../levels/${ newLevel.toLowerCase() }.js`])
         let scenes = _this.scene.manager.scenes
         system.userData.currentLevel = newLevel;
         _this.add.bitmapText(384, 384, 'welbutrin', 'Progress Saved', 32
