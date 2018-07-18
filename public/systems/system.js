@@ -69,7 +69,7 @@ const system = {
                             restoresHealth: 15,
                             supply: 1,
                             useItem: function() {
-                                this.supply--
+                                this.supply--;
                             },
                         }],
                     }, ],
@@ -80,7 +80,7 @@ const system = {
 
         //JSON doesn't support functions
         this.userData.player.actions[3].children.forEach(child => child.useItem = function() {
-            child.supply--
+            child.supply--;
         });
 
         //Add reset button TODO remove for final build
@@ -128,29 +128,29 @@ const system = {
             }
         });
     },
-    
+
     /**
      * Pauses all scenes except for the one passed
      * @param exceptionKey-the key of the scene to not be paused
-     * @param _this-the current scene;
-    **/
-    pauseExceptFor(exceptionKey, _this) {
-        let scenes = _this.scene.manager.scenes
+     * @param scene-the current scene;
+     **/
+    pauseExceptFor(exceptionKey, scene) {
+        let scenes = scene.scene.manager.scenes
         scenes.forEach(scene => {
-            if(scene.scene.key != exceptionKey){
-                _this.scene.manager.pause(scene.scene.key);
+            if (scene.scene.key != exceptionKey) {
+                scene.scene.manager.pause(scene.scene.key);
             }
         })
     },
-    
-    
-    resumeAll(_this){
-        let scenes = _this.scene.manager.scenes
+
+
+    resumeAll(scene) {
+        let scenes = scene.scene.manager.scenes
         scenes.forEach(scene => {
-            _this.scene.manager.resume(scene.scene.key);
+            scene.scene.manager.resume(scene.scene.key);
         })
     }
-    
+
 };
 
 export default system;
