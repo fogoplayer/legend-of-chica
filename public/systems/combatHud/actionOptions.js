@@ -57,7 +57,7 @@ const actionOptions = {
         //A few initial variables
         const gameWidth = scene.sys.game.config.width;
         const gameHeight = scene.sys.game.config.height;
-        const cellWidth = 2 * 200;
+        const cellWidth = 500;
         const cellHeight = 48;
         const length = this.categoriesGroup.getLength();
 
@@ -91,7 +91,7 @@ const actionOptions = {
             const y = gameHeight * 2 / 3 + cellHeight * i;
             const x = 10 + gameWidth - cellWidth;
 
-            let addedText = scene.add.bitmapText(x, y, 'welbutrin', `${ actions[i].name + itemsLeft}`, 32);
+            let addedText = scene.add.bitmapText(x, y, 'welbutrin', `${ actions[i].name + itemsLeft }`, 32);
             addedText.setAlpha(0.5);
             this.actionsGroup.add(addedText);
         }
