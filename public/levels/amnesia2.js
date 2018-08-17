@@ -214,6 +214,6 @@ export default class Amnesia2 extends Phaser.Scene {
 
         ]);
 
-        level.changeLevel('Darkeplier', this);
+        level.changeLevel('Amy', this);
     }
 }
