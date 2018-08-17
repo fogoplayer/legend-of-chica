@@ -76,11 +76,42 @@ const combat = {
         this.player.updateInBattle();
         this.enemy.updateInBattle();
 
-        //Create Dialogue to display results
-        await Dialogue.dialogueConstructorWithPromise(scene, [{
+        let dialogArray = [];
+        dialogArray.push({
             char: 'Combat',
-            text: `${ this.enemy.name } used ${ enemyAttack.name.toUpperCase() }\n${ this.player.name } took ${ -playerAttack.restoresHealth - playerAttack.reducesDamage + enemyAttack.dealsDamage } points of damage\n\n${ this.player.name } used ${playerAttack.name.toUpperCase() }\n${ this.enemy.name } took ${ -enemyAttack.restoresHealth - enemyAttack.reducesDamage + playerAttack.dealsDamage } points of damage\n`
-        }, ], 0x8888ff);
+            text: `${ this.enemy.displayName } used ${ enemyAttack.name.toUpperCase() }`
+        });
+        if (enemyAttack.dealsDamage - playerAttack.reducesDamage > 0) {
+            dialogArray.push({
+                char: 'Combat',
+                text: `${ this.player.displayName } lost ${ enemyAttack.dealsDamage - playerAttack.reducesDamage} HP`
+            });
+        }
+        if (enemyAttack.restoresHealth > 0){
+            dialogArray.push({
+                char: 'Combat',
+                text: `${ this.enemy.displayName } ragained ${ enemyAttack.restoresHeath} HP`
+            });
+        }
+        dialogArray.push({
+            char: 'Combat',
+            text: `${ this.player.displayName } used ${ playerAttack.name.toUpperCase() }`
+        });
+        if (playerAttack.dealsDamage - enemyAttack.reducesDamage > 0) {
+            dialogArray.push({
+                char: 'Combat',
+                text: `${ this.enemy.displayName } lost ${ playerAttack.dealsDamage - enemyAttack.reducesDamage} HP`
+            });
+        }
+        if (playerAttack.restoresHealth > 0){
+            dialogArray.push({
+                char: 'Combat',
+                text: `${ this.player.displayName } ragained ${ playerAttack.restoresHealth} HP`
+            });
+        }
+
+        //Create Dialogue to display results
+        await Dialogue.dialogueConstructorWithPromise(scene, dialogArray, 0x8888ff);
 
         this.attackLimiter = undefined;
 
