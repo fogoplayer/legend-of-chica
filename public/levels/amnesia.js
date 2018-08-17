@@ -1,6 +1,7 @@
 //JS module for the amnesia Scene
 
 import level from './level.js';
+import system from '../systems/system.js';
 
 import chica from '../sprites/chica.js';
 import bbb from '../sprites/bbb.js';
@@ -47,6 +48,7 @@ export default class Amnesia extends Phaser.Scene {
         this.sceneWidth = this.sys.game.config.width;
         this.sceneHeight = this.sys.game.config.height;
         chica.createInWorld(this, this.sceneWidth / 3, this.sceneHeight / 2);
+        
         await Dialogue.dialogueConstructorWithPromise(this, [{
                 char: 'Chica',
                 text: 'Wooooof…'
@@ -64,7 +66,6 @@ export default class Amnesia extends Phaser.Scene {
                 text: 'Who\'s that?'
             },
         ]);
-
 
         await (() => {
             return new Promise((resolve, reject) => {
@@ -95,9 +96,5 @@ export default class Amnesia extends Phaser.Scene {
         }, ]);
 
         level.changeLevel('Tutorial', this);
-    }
-
-    update() {
-        chica.updateInWorld(this);
     }
 }
