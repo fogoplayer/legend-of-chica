@@ -4,10 +4,10 @@ import level from './level.js';
 import chica from '../sprites/chica.js';
 import bbb from '../sprites/bbb.js';
 
-import Hud from '../../systems/combatHud/combatHud.js';
-import actionOptions from '../../systems/combatHud/actionOptions/actionOptions.js';
-import Dialogue from '../../systems/dialogue.js';
-import combat from '../../systems/combat.js';
+import Hud from '../systems/combatHud/combatHud.js';
+import actionOptions from '../systems/combatHud/actionOptions/actionOptions.js';
+import Dialogue from '../systems/dialogue.js';
+import combat from '../systems/combat.js';
 
 import Intro from '../intro/intro.js';
 
