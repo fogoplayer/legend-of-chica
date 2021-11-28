@@ -9,7 +9,7 @@ import actionOptions from '../systems/combatHud/actionOptions.js';
 import Dialogue from '../systems/dialogue.js';
 import combat from '../systems/combat.js';
 
-import Intro from './intro/intro.js';
+import Intro from './intro.js';
 
 export default class Tutorial extends Phaser.Scene {
 
